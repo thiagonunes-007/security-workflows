@@ -1,0 +1,87 @@
+name: Strix Pentest (reusable)
+
+on:
+  workflow_call:
+    inputs:
+      target:
+        description: "Diretorio/alvo do scan"
+        type: string
+        default: "./"
+      scan-mode:
+        description: "quick | standard | deep"
+        type: string
+        default: "quick"
+      max-budget:
+        description: "Orcamento maximo (USD) da run do Strix"
+        type: number
+        default: 10
+      scope-mode:
+        description: "diff (so o PR) ou full (repo inteiro, usar em runs agendadas)"
+        type: string
+        default: "diff"
+
+jobs:
+  strix-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # necessario para resolver o diff do PR
+
+      - name: Install Strix
+        run: curl -sSL https://strix.ai/install | bash
+
+      - name: Resolve diff base
+        id: base
+        if: inputs.scope-mode == 'diff'
+        run: |
+          BASE_BRANCH="${{ github.base_ref }}"
+          if [ -z "$BASE_BRANCH" ]; then
+            BASE_BRANCH=$(git symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null)
+            BASE_BRANCH="${BASE_BRANCH#origin/}"
+          fi
+          DIFF_BASE="origin/${BASE_BRANCH:-main}"
+          if ! git rev-parse --verify --quiet "$DIFF_BASE" >/dev/null; then
+            echo "Nao consegui resolver a base do diff '$DIFF_BASE'." >&2
+            exit 1
+          fi
+          echo "diff_base=$DIFF_BASE" >> "$GITHUB_OUTPUT"
+
+      - name: Run Security Scan (diff)
+        if: inputs.scope-mode == 'diff'
+        env:
+          STRIX_LLM: ${{ secrets.STRIX_LLM }}
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+        run: |
+          strix -n -t "${{ inputs.target }}" \
+            --scan-mode "${{ inputs.scan-mode }}" \
+            --scope-mode diff \
+            --diff-base "${{ steps.base.outputs.diff_base }}" \
+            --max-budget "${{ inputs.max-budget }}"
+
+      - name: Run Security Scan (full)
+        if: inputs.scope-mode != 'diff'
+        env:
+          STRIX_LLM: ${{ secrets.STRIX_LLM }}
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+        run: |
+          strix -n -t "${{ inputs.target }}" \
+            --scan-mode "${{ inputs.scan-mode }}" \
+            --max-budget "${{ inputs.max-budget }}"
+
+      # Nao falhar aberto: uma run que bate no orcamento maximo sai com
+      # exit 0 mas deixa o run.json com status "stopped", nao "completed".
+      - name: Fail unless the scan completed
+        run: |
+          run_json=$(ls -t strix_runs/*/run.json | head -1)
+          status=$(jq -r .status "$run_json")
+          if [ "$status" != "completed" ]; then
+            echo "Strix run status e '$status' - o scan nao completou (provavel orcamento esgotado). Aumente max-budget." >&2
+            exit 1
+          fi
+
+      - name: Upload SARIF
+        if: always()
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: strix_runs
