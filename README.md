@@ -20,9 +20,18 @@ on:
 
 jobs:
   strix-scan:
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
     uses: thiagonunes-007/security-workflows/.github/workflows/strix-scan.yml@main
     secrets: inherit
 ```
+
+> `security-events: write` e `actions: read` sao obrigatorios aqui —
+> um workflow reutilizavel nunca recebe mais permissao do que o
+> chamador concede, entao sem isso o upload do SARIF falha mesmo que
+> o scan em si complete normalmente.
 
 2. No repo, em **Settings -> Secrets and variables -> Actions**, adiciona:
    - `STRIX_LLM` - id do modelo (ex.: `anthropic/claude-sonnet-5`)
@@ -47,6 +56,10 @@ on:
 
 jobs:
   strix-scan-full:
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
     uses: thiagonunes-007/security-workflows/.github/workflows/strix-scan.yml@main
     with:
       scope-mode: full
