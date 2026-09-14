@@ -84,8 +84,12 @@ jobs:
             exit 1
           fi
 
+      # Nao bloqueia o PR: repo privado sem GitHub Advanced Security
+      # nao consegue receber upload de SARIF ("Code scanning is not
+      # enabled for this repository") e isso nao deve derrubar o check.
       - name: Upload SARIF
         if: always()
+        continue-on-error: true
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: strix_runs
