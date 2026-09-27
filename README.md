@@ -82,3 +82,13 @@ jobs:
 - [MedDecision](https://github.com/thiagonunes-007/MedDecision) (saude-app)
 - [MedDecision-ckb](https://github.com/thiagonunes-007/MedDecision-ckb)
 - [meddecision-oci-instance-hunter](https://github.com/thiagonunes-007/meddecision-oci-instance-hunter)
+
+---
+
+## Outros workflows neste repo
+
+### OCI Free-Tier Instance Hunter
+
+Workflow que fica tentando criar uma instancia do plano **Always Free** da
+Oracle Cloud ate conseguir, contornando o erro `Out of host capacity`.
+Setup e uso em [`docs/oci-instance-hunter.md`](docs/oci-instance-hunter.md).

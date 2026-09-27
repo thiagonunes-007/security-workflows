@@ -1,0 +1,111 @@
+name: OCI Free-Tier Instance Hunter
+
+# Caca uma instancia free-tier ("Always Free") da Oracle Cloud, contornando
+# o erro "Out of host capacity" com tentativas repetidas via cron.
+#
+# Rode manualmente (workflow_dispatch) pra testar a configuracao, e deixe o
+# cron rodando pra pegar a instancia assim que a Oracle liberar capacidade.
+#
+# Quando conseguir a maquina, o job detecta que ela ja existe e para de
+# tentar sozinho (sem falhar). Ai voce pode desabilitar o cron.
+
+on:
+  workflow_dispatch:
+    inputs:
+      shape:
+        description: "Shape (ex.: VM.Standard.A1.Flex ou VM.Standard.E2.1.Micro)"
+        required: false
+        default: "VM.Standard.A1.Flex"
+      ocpus:
+        description: "OCPUs (apenas shapes .Flex; A1 free-tier permite ate 4)"
+        required: false
+        default: "4"
+      memory_gb:
+        description: "Memoria em GB (apenas shapes .Flex; A1 free-tier permite ate 24)"
+        required: false
+        default: "24"
+  schedule:
+    # A cada 15 min. O GitHub pode atrasar/pular runs agendadas sob carga;
+    # e um teto, nao uma garantia. Ajuste a gosto.
+    - cron: "*/15 * * * *"
+
+# Evita rodadas concorrentes tentando criar a mesma instancia ao mesmo tempo.
+concurrency:
+  group: oci-instance-hunter
+  cancel-in-progress: false
+
+jobs:
+  hunt:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Instala OCI CLI
+        run: |
+          pip install --quiet oci-cli
+          oci --version
+
+      - name: Configura credenciais OCI
+        env:
+          OCI_CLI_USER: ${{ secrets.OCI_CLI_USER }}
+          OCI_CLI_TENANCY: ${{ secrets.OCI_CLI_TENANCY }}
+          OCI_CLI_FINGERPRINT: ${{ secrets.OCI_CLI_FINGERPRINT }}
+          OCI_CLI_REGION: ${{ secrets.OCI_CLI_REGION }}
+          OCI_CLI_KEY_CONTENT: ${{ secrets.OCI_CLI_KEY_CONTENT }}
+        run: |
+          set -euo pipefail
+          : "${OCI_CLI_USER:?falta o secret OCI_CLI_USER}"
+          : "${OCI_CLI_TENANCY:?falta o secret OCI_CLI_TENANCY}"
+          : "${OCI_CLI_FINGERPRINT:?falta o secret OCI_CLI_FINGERPRINT}"
+          : "${OCI_CLI_REGION:?falta o secret OCI_CLI_REGION}"
+          : "${OCI_CLI_KEY_CONTENT:?falta o secret OCI_CLI_KEY_CONTENT}"
+
+          mkdir -p ~/.oci
+          printf '%s\n' "$OCI_CLI_KEY_CONTENT" > ~/.oci/oci_api_key.pem
+          chmod 600 ~/.oci/oci_api_key.pem
+          cat > ~/.oci/config <<EOF
+          [DEFAULT]
+          user=$OCI_CLI_USER
+          fingerprint=$OCI_CLI_FINGERPRINT
+          tenancy=$OCI_CLI_TENANCY
+          region=$OCI_CLI_REGION
+          key_file=$HOME/.oci/oci_api_key.pem
+          EOF
+          chmod 600 ~/.oci/config
+          # Sanidade: valida auth cedo com um erro claro se as chaves estiverem erradas.
+          oci iam region list >/dev/null
+
+      - name: Caca instancia
+        id: hunt
+        env:
+          OCI_COMPARTMENT_ID: ${{ secrets.OCI_COMPARTMENT_ID }}
+          OCI_SUBNET_ID: ${{ secrets.OCI_SUBNET_ID }}
+          OCI_SSH_AUTHORIZED_KEYS: ${{ secrets.OCI_SSH_AUTHORIZED_KEYS }}
+          OCI_SHAPE: ${{ github.event.inputs.shape || 'VM.Standard.A1.Flex' }}
+          OCI_OCPUS: ${{ github.event.inputs.ocpus || '4' }}
+          OCI_MEMORY_GB: ${{ github.event.inputs.memory_gb || '24' }}
+          OCI_DISPLAY_NAME: ${{ vars.OCI_DISPLAY_NAME || 'free-arm-hunter' }}
+          OCI_OS: ${{ vars.OCI_OS || 'Canonical Ubuntu' }}
+          OCI_OS_VERSION: ${{ vars.OCI_OS_VERSION || '22.04' }}
+        run: |
+          chmod +x scripts/oci-hunter.sh
+          ./scripts/oci-hunter.sh
+
+      - name: Resumo
+        if: always()
+        run: |
+          {
+            echo "## OCI Instance Hunter"
+            if [ -n "${{ steps.hunt.outputs.instance_id }}" ]; then
+              echo ":white_check_mark: **Instancia conseguida!**"
+              echo ""
+              echo "- Instance OCID: \`${{ steps.hunt.outputs.instance_id }}\`"
+              echo "- Availability domain: \`${{ steps.hunt.outputs.availability_domain }}\`"
+              echo "- IP publico: \`${{ steps.hunt.outputs.public_ip }}\`"
+              echo ""
+              echo "> Pode desabilitar o cron deste workflow agora."
+            else
+              echo ":hourglass: Sem instancia nesta rodada (provavelmente 'Out of host capacity'). O cron tenta de novo."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
