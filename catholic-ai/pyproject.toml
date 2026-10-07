@@ -1,0 +1,20 @@
+[project]
+name = "catholic-ai"
+version = "0.1.0"
+description = "Assistente católico via WhatsApp, fundamentado em RAG sobre Escritura, Tradição e Magistério"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.115",
+  "uvicorn[standard]>=0.30",
+  "httpx>=0.27",
+  "anthropic>=0.40",
+  "chromadb>=0.5",
+  "sentence-transformers>=3.0",
+  "pydantic-settings>=2.4",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
