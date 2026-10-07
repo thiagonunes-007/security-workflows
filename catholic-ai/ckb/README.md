@@ -104,3 +104,40 @@ dois latinos (`canon_ref_2`).
 - Ketiv é mantido no corpo; qere e variantes (`<note>`) são descartados. Texto com cantilação e vocalização
   originais; a busca usa a versão normalizada (`normalize_for_search`).
 - Sem deuterocanônicos (não existem no WLC); no hebraico, esses livros vêm do grego/latim.
+
+## Estado dos idiomas (corpus convertidos)
+| Idioma | Fonte (`source_id`) | Cobertura | Alinhado à Vulgata | Licença |
+|---|---|---|---|---|
+| Latim | `vulgata_clementina` | 73 livros, 35.809 v. | (referência) | domínio público |
+| Inglês | `douay_rheims` | 73 livros, 35.805 v. | 35.800 | domínio público |
+| Hebraico | `wlc_hebrew` | 39 livros (protocanônicos), 23.213 v. | ~23.000 | domínio público |
+| Grego NT | `byz_nt` | 27 livros, 7.953 v. (texto bizantino) | 7.618 | domínio público |
+| Grego AT | `lxx_swete` | 45 livros, 26.853 v. (sem Eclesiastes; Jó, Jdt, Pr, Sb, Lm, Tb, Est, Sir sem alinhamento) | 19.008 | **CC BY-SA 4.0** |
+| Alemão | `allioli_de` | 68 de 73 livros (faltam 1-2Rs, Esd, Rm, Hb), 33.115 v. | ~33.100 | domínio público (idade) |
+| Francês | `fr_lxx_giguet` | só AT (46 livros), 27.112 v. | ~20.000 | domínio público (idade) |
+| Português, Italiano, Espanhol | — | **sem corpus** | — | ver abaixo |
+
+```bash
+python -m scripts.convert_greek byz  <csv-unicode/ccat/no-variants do byztxt/byzantine-majority-text>
+python -m scripts.convert_greek lxx  <data/tlg0527/tlg0NN/* do OpenGreekAndLatin/First1KGreek, na mesma pasta>
+python -m scripts.convert_allioli_german allioli.tsv
+python -m scripts.convert_aligned_bible fr_lxx_giguet FreLXXGiguet.json
+python -m scripts.audit_alignment lxx_swete        # concordância por nomes próprios, por livro e rótulo
+```
+
+**Auditoria independente (`ckb/verify.py`)**: o alinhador de comprimento erra em livros reordenados na LXX
+(Jeremias, Jó, Provérbios...). Para o grego e o francês, cada par é conferido por nomes próprios
+(esqueleto consonantal: Ἰσραήλ = Israël = `srl`). A linha de base no NT, onde o alinhamento é certo, é
+~85%. Rótulo/livro abaixo de 65% perde o `canon_ref` (o texto permanece e continua pesquisável).
+Hebraico e Allioli não passam por essa auditoria (hebraico: conferido por ~40 concordâncias conhecidas;
+Allioli: numeração da Vulgata).
+
+**Português, italiano, espanhol — por que faltam**: não achei texto digital católico e livre acessível.
+O Pe. Figueiredo (pt), Martini (it) e Torres Amat/Scío (es) são de domínio público por idade, mas só existem
+como scans/OCR (Internet Archive, Atla, Wikisource), que exigem OCR e revisão. As traduções atuais
+(Ave Maria, CNBB, CEI, Straubinger, Bíblia de Jerusalém) têm direitos reservados. O scrollmapper traz
+Reina-Valera e Almeida, mas protestantes, sem deuterocanônicos e com leituras doutrinariamente distintas
+(ex.: Lc 1,28) — não incluídas por padrão.
+
+**Francês**: `crampon_fr` (Crampon 1923, 73 livros, NT incluso) existe no scrollmapper e o pipeline o
+converte, mas os direitos da edição de 1923 são incertos; por isso não foi incluído.

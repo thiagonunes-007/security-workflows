@@ -1,0 +1,23 @@
+{
+  "source_id": "allioli_de",
+  "converted_on": "2026-10-07",
+  "input_url": "https://raw.githubusercontent.com/AlexBocken/allioli/master/allioli.tsv",
+  "input_sha256": "30ec60cdf1091554ca1d6039ed9d1f3b3991a7445e83df2dccf616504505a06d",
+  "passages": 33115,
+  "books_present": 68,
+  "books_missing_in_source": [
+    "1Kgs",
+    "2Kgs",
+    "Ezra",
+    "Heb",
+    "Rom"
+  ],
+  "verses_without_latin_counterpart": [
+    "Sl 15,11",
+    "Is 45,26",
+    "At 7,60"
+  ],
+  "latin_verses_without_german": 2697,
+  "duplicates_skipped": 0,
+  "license_note": "Allioli (+1873), ed. 1914: domínio público por idade; TSV de AlexBocken/allioli (Unlicense)."
+}

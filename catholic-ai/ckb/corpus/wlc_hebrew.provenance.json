@@ -177,6 +177,188 @@
       "deslocado": 6
     }
   },
+  "alignment_quality": {
+    "Gen": {
+      "verses": 1533,
+      "odd_fraction": 0.016,
+      "aligned": true
+    },
+    "Exod": {
+      "verses": 1213,
+      "odd_fraction": 0.01,
+      "aligned": true
+    },
+    "Lev": {
+      "verses": 859,
+      "odd_fraction": 0.014,
+      "aligned": true
+    },
+    "Num": {
+      "verses": 1289,
+      "odd_fraction": 0.029,
+      "aligned": true
+    },
+    "Deut": {
+      "verses": 959,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Josh": {
+      "verses": 658,
+      "odd_fraction": 0.033,
+      "aligned": true
+    },
+    "Judg": {
+      "verses": 618,
+      "odd_fraction": 0.015,
+      "aligned": true
+    },
+    "Ruth": {
+      "verses": 85,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "1Sam": {
+      "verses": 811,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "2Sam": {
+      "verses": 695,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "1Kgs": {
+      "verses": 817,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "2Kgs": {
+      "verses": 719,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "1Chr": {
+      "verses": 943,
+      "odd_fraction": 0.018,
+      "aligned": true
+    },
+    "2Chr": {
+      "verses": 822,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Ezra": {
+      "verses": 280,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Neh": {
+      "verses": 405,
+      "odd_fraction": 0.042,
+      "aligned": true
+    },
+    "Job": {
+      "verses": 1070,
+      "odd_fraction": 0.008,
+      "aligned": true
+    },
+    "Prov": {
+      "verses": 915,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Eccl": {
+      "verses": 222,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Song": {
+      "verses": 117,
+      "odd_fraction": 0.034,
+      "aligned": true
+    },
+    "Isa": {
+      "verses": 1291,
+      "odd_fraction": 0.004,
+      "aligned": true
+    },
+    "Jer": {
+      "verses": 1364,
+      "odd_fraction": 0.004,
+      "aligned": true
+    },
+    "Lam": {
+      "verses": 154,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Ezek": {
+      "verses": 1273,
+      "odd_fraction": 0.005,
+      "aligned": true
+    },
+    "Hos": {
+      "verses": 197,
+      "odd_fraction": 0.025,
+      "aligned": true
+    },
+    "Joel": {
+      "verses": 73,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Amos": {
+      "verses": 146,
+      "odd_fraction": 0.034,
+      "aligned": true
+    },
+    "Obad": {
+      "verses": 21,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Jonah": {
+      "verses": 48,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Mic": {
+      "verses": 105,
+      "odd_fraction": 0.057,
+      "aligned": true
+    },
+    "Nah": {
+      "verses": 47,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Hab": {
+      "verses": 56,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Zeph": {
+      "verses": 53,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Hag": {
+      "verses": 38,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Zech": {
+      "verses": 211,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Mal": {
+      "verses": 55,
+      "odd_fraction": 0.0,
+      "aligned": true
+    }
+  },
   "empty_verses_in_input": [],
   "license_note": "Texto do WLC em domínio público; lematização/morfologia (não usadas) CC BY 4.0 (OSHB)."
 }

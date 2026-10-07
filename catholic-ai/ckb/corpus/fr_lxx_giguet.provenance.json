@@ -1,0 +1,885 @@
+{
+  "source_id": "fr_lxx_giguet",
+  "converted_on": "2026-10-07",
+  "input_url": "https://raw.githubusercontent.com/scrollmapper/bible_databases/master/formats/json/FreLXXGiguet.json",
+  "input_sha256": "0fc7cb84a3b69bf89891637fbd9635ec03b541179142b7dc6385838c311eaa25",
+  "passages": 27112,
+  "books_present": 46,
+  "books_missing": [
+    "1Cor",
+    "1John",
+    "1Pet",
+    "1Thess",
+    "1Tim",
+    "2Cor",
+    "2John",
+    "2Pet",
+    "2Thess",
+    "2Tim",
+    "3John",
+    "Acts",
+    "Col",
+    "Eph",
+    "Gal",
+    "Heb",
+    "Jas",
+    "John",
+    "Jude",
+    "Luke",
+    "Mark",
+    "Matt",
+    "Phil",
+    "Phlm",
+    "Rev",
+    "Rom",
+    "Titus"
+  ],
+  "alignment_totals": {
+    "identico": 19795,
+    "incerto": 90,
+    "sem-par": 7087,
+    "deslocado": 140
+  },
+  "alignment_quality": {
+    "Gen": {
+      "verses": 1532,
+      "odd_fraction": 0.016,
+      "aligned": true
+    },
+    "Exod": {
+      "verses": 1176,
+      "odd_fraction": 0.086,
+      "aligned": true
+    },
+    "Lev": {
+      "verses": 859,
+      "odd_fraction": 0.021,
+      "aligned": true
+    },
+    "Num": {
+      "verses": 1287,
+      "odd_fraction": 0.009,
+      "aligned": true
+    },
+    "Deut": {
+      "verses": 959,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Josh": {
+      "verses": 639,
+      "odd_fraction": 0.133,
+      "aligned": true
+    },
+    "Judg": {
+      "verses": 618,
+      "odd_fraction": 0.015,
+      "aligned": true
+    },
+    "Ruth": {
+      "verses": 85,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "1Sam": {
+      "verses": 770,
+      "odd_fraction": 0.14,
+      "aligned": true
+    },
+    "2Sam": {
+      "verses": 696,
+      "odd_fraction": 0.009,
+      "aligned": true
+    },
+    "1Kgs": {
+      "verses": 758,
+      "odd_fraction": 0.277,
+      "aligned": true
+    },
+    "2Kgs": {
+      "verses": 719,
+      "odd_fraction": 0.008,
+      "aligned": true
+    },
+    "1Chr": {
+      "verses": 925,
+      "odd_fraction": 0.048,
+      "aligned": true
+    },
+    "2Chr": {
+      "verses": 820,
+      "odd_fraction": 0.02,
+      "aligned": true
+    },
+    "Ezra": {
+      "verses": 278,
+      "odd_fraction": 0.036,
+      "aligned": true
+    },
+    "Neh": {
+      "verses": 383,
+      "odd_fraction": 0.128,
+      "aligned": true
+    },
+    "Esth": {
+      "verses": 174,
+      "odd_fraction": 0.954,
+      "aligned": false
+    },
+    "Jdt": {
+      "verses": 331,
+      "odd_fraction": 0.281,
+      "aligned": true
+    },
+    "Tob": {
+      "verses": 245,
+      "odd_fraction": 0.641,
+      "aligned": false
+    },
+    "1Macc": {
+      "verses": 925,
+      "odd_fraction": 0.016,
+      "aligned": true
+    },
+    "2Macc": {
+      "verses": 556,
+      "odd_fraction": 0.014,
+      "aligned": true
+    },
+    "Ps": {
+      "verses": 2496,
+      "odd_fraction": 0.066,
+      "aligned": true
+    },
+    "Prov": {
+      "verses": 880,
+      "odd_fraction": 0.143,
+      "aligned": true
+    },
+    "Eccl": {
+      "verses": 222,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Song": {
+      "verses": 116,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Job": {
+      "verses": 1068,
+      "odd_fraction": 0.009,
+      "aligned": true
+    },
+    "Wis": {
+      "verses": 437,
+      "odd_fraction": 0.043,
+      "aligned": true
+    },
+    "Sir": {
+      "verses": 1387,
+      "odd_fraction": 0.398,
+      "aligned": true
+    },
+    "Hos": {
+      "verses": 198,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Amos": {
+      "verses": 147,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Mic": {
+      "verses": 105,
+      "odd_fraction": 0.114,
+      "aligned": true
+    },
+    "Joel": {
+      "verses": 72,
+      "odd_fraction": 0.069,
+      "aligned": true
+    },
+    "Obad": {
+      "verses": 21,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Jonah": {
+      "verses": 48,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Nah": {
+      "verses": 47,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Hab": {
+      "verses": 56,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Zeph": {
+      "verses": 53,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Hag": {
+      "verses": 38,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Zech": {
+      "verses": 211,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Mal": {
+      "verses": 55,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Isa": {
+      "verses": 1281,
+      "odd_fraction": 0.052,
+      "aligned": true
+    },
+    "Jer": {
+      "verses": 1283,
+      "odd_fraction": 0.278,
+      "aligned": true
+    },
+    "Bar": {
+      "verses": 212,
+      "odd_fraction": 0.052,
+      "aligned": true
+    },
+    "Lam": {
+      "verses": 153,
+      "odd_fraction": 0.033,
+      "aligned": true
+    },
+    "Ezek": {
+      "verses": 1263,
+      "odd_fraction": 0.052,
+      "aligned": true
+    },
+    "Dan": {
+      "verses": 528,
+      "odd_fraction": 0.028,
+      "aligned": true
+    }
+  },
+  "name_audit_filter": {
+    "dropped": 6668,
+    "by_book_label": {
+      "Gen": {
+        "identico": {
+          "ok": 497,
+          "n": 554,
+          "rate": 0.9,
+          "kept": true
+        },
+        "incerto": {
+          "ok": 11,
+          "n": 13,
+          "rate": 0.85,
+          "kept": true
+        },
+        "deslocado": {
+          "ok": 1,
+          "n": 1,
+          "rate": 1.0,
+          "kept": false
+        }
+      },
+      "Exod": {
+        "identico": {
+          "ok": 331,
+          "n": 379,
+          "rate": 0.87,
+          "kept": true
+        },
+        "incerto": {
+          "ok": 4,
+          "n": 14,
+          "rate": 0.29,
+          "kept": false
+        }
+      },
+      "Lev": {
+        "identico": {
+          "ok": 72,
+          "n": 110,
+          "rate": 0.65,
+          "kept": true
+        },
+        "incerto": {
+          "ok": 3,
+          "n": 5,
+          "rate": 0.6,
+          "kept": false
+        }
+      },
+      "Num": {
+        "identico": {
+          "ok": 486,
+          "n": 616,
+          "rate": 0.79,
+          "kept": true
+        },
+        "incerto": {
+          "ok": 3,
+          "n": 3,
+          "rate": 1.0,
+          "kept": false
+        }
+      },
+      "Deut": {
+        "identico": {
+          "ok": 193,
+          "n": 226,
+          "rate": 0.85,
+          "kept": true
+        }
+      },
+      "Josh": {
+        "identico": {
+          "ok": 264,
+          "n": 327,
+          "rate": 0.81,
+          "kept": true
+        },
+        "incerto": {
+          "ok": 34,
+          "n": 64,
+          "rate": 0.53,
+          "kept": false
+        },
+        "deslocado": {
+          "ok": 11,
+          "n": 27,
+          "rate": 0.41,
+          "kept": false
+        }
+      },
+      "Judg": {
+        "identico": {
+          "ok": 367,
+          "n": 394,
+          "rate": 0.93,
+          "kept": true
+        },
+        "incerto": {
+          "ok": 4,
+          "n": 4,
+          "rate": 1.0,
+          "kept": false
+        }
+      },
+      "Ruth": {
+        "identico": {
+          "ok": 24,
+          "n": 27,
+          "rate": 0.89,
+          "kept": true
+        }
+      },
+      "1Sam": {
+        "identico": {
+          "ok": 308,
+          "n": 356,
+          "rate": 0.87,
+          "kept": true
+        },
+        "incerto": {
+          "ok": 39,
+          "n": 70,
+          "rate": 0.56,
+          "kept": false
+        },
+        "deslocado": {
+          "ok": 20,
+          "n": 23,
+          "rate": 0.87,
+          "kept": true
+        }
+      },
+      "2Sam": {
+        "identico": {
+          "ok": 339,
+          "n": 390,
+          "rate": 0.87,
+          "kept": true
+        },
+        "incerto": {
+          "ok": 6,
+          "n": 6,
+          "rate": 1.0,
+          "kept": false
+        }
+      },
+      "1Kgs": {
+        "identico": {
+          "ok": 195,
+          "n": 214,
+          "rate": 0.91,
+          "kept": true
+        },
+        "incerto": {
+          "ok": 74,
+          "n": 144,
+          "rate": 0.51,
+          "kept": false
+        },
+        "deslocado": {
+          "ok": 34,
+          "n": 95,
+          "rate": 0.36,
+          "kept": false
+        }
+      },
+      "2Kgs": {
+        "identico": {
+          "ok": 367,
+          "n": 421,
+          "rate": 0.87,
+          "kept": true
+        },
+        "incerto": {
+          "ok": 4,
+          "n": 5,
+          "rate": 0.8,
+          "kept": false
+        }
+      },
+      "1Chr": {
+        "incerto": {
+          "ok": 14,
+          "n": 28,
+          "rate": 0.5,
+          "kept": false
+        },
+        "deslocado": {
+          "ok": 20,
+          "n": 24,
+          "rate": 0.83,
+          "kept": true
+        },
+        "identico": {
+          "ok": 504,
+          "n": 582,
+          "rate": 0.87,
+          "kept": true
+        }
+      },
+      "2Chr": {
+        "identico": {
+          "ok": 421,
+          "n": 474,
+          "rate": 0.89,
+          "kept": true
+        },
+        "incerto": {
+          "ok": 4,
+          "n": 6,
+          "rate": 0.67,
+          "kept": false
+        }
+      },
+      "Ezra": {
+        "identico": {
+          "ok": 154,
+          "n": 171,
+          "rate": 0.9,
+          "kept": true
+        },
+        "incerto": {
+          "ok": 6,
+          "n": 6,
+          "rate": 1.0,
+          "kept": false
+        }
+      },
+      "Neh": {
+        "identico": {
+          "ok": 131,
+          "n": 152,
+          "rate": 0.86,
+          "kept": true
+        },
+        "incerto": {
+          "ok": 14,
+          "n": 37,
+          "rate": 0.38,
+          "kept": false
+        },
+        "deslocado": {
+          "ok": 9,
+          "n": 20,
+          "rate": 0.45,
+          "kept": false
+        }
+      },
+      "Jdt": {
+        "identico": {
+          "ok": 5,
+          "n": 5,
+          "rate": 1.0,
+          "kept": false
+        },
+        "incerto": {
+          "ok": 7,
+          "n": 38,
+          "rate": 0.18,
+          "kept": false
+        },
+        "deslocado": {
+          "ok": 12,
+          "n": 99,
+          "rate": 0.12,
+          "kept": false
+        }
+      },
+      "1Macc": {
+        "identico": {
+          "ok": 434,
+          "n": 479,
+          "rate": 0.91,
+          "kept": true
+        },
+        "incerto": {
+          "ok": 5,
+          "n": 9,
+          "rate": 0.56,
+          "kept": false
+        },
+        "deslocado": {
+          "ok": 0,
+          "n": 1,
+          "rate": 0.0,
+          "kept": false
+        }
+      },
+      "2Macc": {
+        "identico": {
+          "ok": 206,
+          "n": 243,
+          "rate": 0.85,
+          "kept": true
+        },
+        "incerto": {
+          "ok": 2,
+          "n": 2,
+          "rate": 1.0,
+          "kept": false
+        }
+      },
+      "Ps": {
+        "incerto": {
+          "ok": 3,
+          "n": 7,
+          "rate": 0.43,
+          "kept": false
+        },
+        "identico": {
+          "ok": 130,
+          "n": 163,
+          "rate": 0.8,
+          "kept": true
+        },
+        "deslocado": {
+          "ok": 2,
+          "n": 5,
+          "rate": 0.4,
+          "kept": false
+        }
+      },
+      "Prov": {
+        "identico": {
+          "ok": 3,
+          "n": 5,
+          "rate": 0.6,
+          "kept": false
+        },
+        "deslocado": {
+          "ok": 0,
+          "n": 2,
+          "rate": 0.0,
+          "kept": false
+        }
+      },
+      "Eccl": {
+        "identico": {
+          "ok": 5,
+          "n": 6,
+          "rate": 0.83,
+          "kept": true
+        }
+      },
+      "Song": {
+        "identico": {
+          "ok": 24,
+          "n": 25,
+          "rate": 0.96,
+          "kept": true
+        }
+      },
+      "Job": {
+        "identico": {
+          "ok": 17,
+          "n": 53,
+          "rate": 0.32,
+          "kept": false
+        },
+        "deslocado": {
+          "ok": 0,
+          "n": 1,
+          "rate": 0.0,
+          "kept": false
+        }
+      },
+      "Wis": {
+        "incerto": {
+          "ok": 0,
+          "n": 1,
+          "rate": 0.0,
+          "kept": false
+        },
+        "deslocado": {
+          "ok": 0,
+          "n": 1,
+          "rate": 0.0,
+          "kept": false
+        },
+        "identico": {
+          "ok": 1,
+          "n": 5,
+          "rate": 0.2,
+          "kept": false
+        }
+      },
+      "Sir": {
+        "incerto": {
+          "ok": 12,
+          "n": 43,
+          "rate": 0.28,
+          "kept": false
+        },
+        "deslocado": {
+          "ok": 0,
+          "n": 16,
+          "rate": 0.0,
+          "kept": false
+        },
+        "identico": {
+          "ok": 13,
+          "n": 27,
+          "rate": 0.48,
+          "kept": false
+        }
+      },
+      "Hos": {
+        "identico": {
+          "ok": 75,
+          "n": 86,
+          "rate": 0.87,
+          "kept": true
+        }
+      },
+      "Amos": {
+        "identico": {
+          "ok": 49,
+          "n": 56,
+          "rate": 0.88,
+          "kept": true
+        }
+      },
+      "Mic": {
+        "identico": {
+          "ok": 26,
+          "n": 28,
+          "rate": 0.93,
+          "kept": true
+        }
+      },
+      "Joel": {
+        "identico": {
+          "ok": 10,
+          "n": 12,
+          "rate": 0.83,
+          "kept": true
+        }
+      },
+      "Obad": {
+        "identico": {
+          "ok": 3,
+          "n": 3,
+          "rate": 1.0,
+          "kept": true
+        }
+      },
+      "Jonah": {
+        "identico": {
+          "ok": 2,
+          "n": 2,
+          "rate": 1.0,
+          "kept": true
+        }
+      },
+      "Nah": {
+        "identico": {
+          "ok": 4,
+          "n": 5,
+          "rate": 0.8,
+          "kept": true
+        }
+      },
+      "Hab": {
+        "identico": {
+          "ok": 4,
+          "n": 4,
+          "rate": 1.0,
+          "kept": true
+        }
+      },
+      "Zeph": {
+        "identico": {
+          "ok": 12,
+          "n": 14,
+          "rate": 0.86,
+          "kept": true
+        }
+      },
+      "Hag": {
+        "identico": {
+          "ok": 7,
+          "n": 8,
+          "rate": 0.88,
+          "kept": true
+        }
+      },
+      "Zech": {
+        "identico": {
+          "ok": 67,
+          "n": 75,
+          "rate": 0.89,
+          "kept": true
+        }
+      },
+      "Mal": {
+        "identico": {
+          "ok": 5,
+          "n": 6,
+          "rate": 0.83,
+          "kept": true
+        }
+      },
+      "Isa": {
+        "identico": {
+          "ok": 241,
+          "n": 293,
+          "rate": 0.82,
+          "kept": true
+        },
+        "incerto": {
+          "ok": 10,
+          "n": 14,
+          "rate": 0.71,
+          "kept": true
+        },
+        "deslocado": {
+          "ok": 0,
+          "n": 4,
+          "rate": 0.0,
+          "kept": false
+        }
+      },
+      "Jer": {
+        "identico": {
+          "ok": 81,
+          "n": 88,
+          "rate": 0.92,
+          "kept": true
+        },
+        "incerto": {
+          "ok": 35,
+          "n": 209,
+          "rate": 0.17,
+          "kept": false
+        },
+        "deslocado": {
+          "ok": 51,
+          "n": 276,
+          "rate": 0.18,
+          "kept": false
+        }
+      },
+      "Bar": {
+        "identico": {
+          "ok": 48,
+          "n": 48,
+          "rate": 1.0,
+          "kept": true
+        },
+        "incerto": {
+          "ok": 0,
+          "n": 1,
+          "rate": 0.0,
+          "kept": false
+        }
+      },
+      "Lam": {
+        "identico": {
+          "ok": 12,
+          "n": 15,
+          "rate": 0.8,
+          "kept": true
+        }
+      },
+      "Ezek": {
+        "identico": {
+          "ok": 271,
+          "n": 323,
+          "rate": 0.84,
+          "kept": true
+        },
+        "incerto": {
+          "ok": 9,
+          "n": 16,
+          "rate": 0.56,
+          "kept": false
+        },
+        "deslocado": {
+          "ok": 5,
+          "n": 5,
+          "rate": 1.0,
+          "kept": false
+        }
+      },
+      "Dan": {
+        "identico": {
+          "ok": 144,
+          "n": 161,
+          "rate": 0.89,
+          "kept": true
+        },
+        "deslocado": {
+          "ok": 31,
+          "n": 31,
+          "rate": 1.0,
+          "kept": true
+        },
+        "incerto": {
+          "ok": 4,
+          "n": 4,
+          "rate": 1.0,
+          "kept": false
+        }
+      }
+    }
+  },
+  "license_note": "Trad. de Pierre Giguet (1872), domínio público por idade; só AT; numeração da LXX."
+}

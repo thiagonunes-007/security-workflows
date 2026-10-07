@@ -47,3 +47,34 @@ def align(a_lens: list[int], b_lens: list[int], band: int = 150, sigma: float = 
         path.append((tuple(range(p[0], cur[0])), tuple(range(p[1], cur[1]))))
         cur = p
     return path[::-1]
+
+
+def classify_book(native, a_lens, latin, max_odd: float = 0.4):
+    """Alinha um livro a ``latin`` e rotula cada versículo.
+
+    native: [(cap, vers)] do texto A; a_lens: comprimentos; latin: [((cap, vers), comprimento)].
+    Retorna (res, stats). res[i] = {"refs": [(cap, vers), ...], "label": ...}.
+    Rótulos: identico | deslocado | incerto | "" (sem par). TRAVA DE QUALIDADE: se mais de ``max_odd`` dos
+    versículos estiver em regiões não 1:1 (sinal de acréscimos/reordenação que o método não resolve),
+    o livro inteiro fica SEM alinhamento em vez de com pares errados.
+    """
+    beads = align(a_lens, [n for _, n in latin])
+    res = [{"refs": [], "label": ""} for _ in native]
+    odd = set()
+    for hi, li in beads:
+        if len(hi) == 1 and len(li) == 1:
+            continue
+        for i in range(max(0, hi[0] - 2 if hi else 0), min(len(native), (hi[-1] + 3) if hi else 0)):
+            odd.add(i)
+    frac = len(odd) / max(1, len(native))
+    stats = {"verses": len(native), "odd_fraction": round(frac, 3), "aligned": frac <= max_odd}
+    if frac > max_odd:
+        return res, stats
+    for hi, li in beads:
+        for i in hi:
+            if li:
+                res[i]["refs"] = [latin[j][0] for j in li][:2]
+                same = len(hi) == len(li) == 1 and latin[li[0]][0] == native[i]
+                res[i]["label"] = "incerto" if (i in odd or len(hi) != len(li)) else (
+                    "identico" if same else "deslocado")
+    return res, stats

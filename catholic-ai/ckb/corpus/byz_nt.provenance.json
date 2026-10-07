@@ -1,0 +1,446 @@
+{
+  "source_id": "byz_nt",
+  "converted_on": "2026-10-07",
+  "input_url": "https://github.com/byztxt/byzantine-majority-text/tree/master/csv-unicode/ccat/no-variants",
+  "input_sha256_of_concatenated_files": "b9fd2e345fb14876b2c7eb205c51a7462ce9017b90415fb00e89550a43917923",
+  "passages": 7953,
+  "books_present": 27,
+  "books_absent_from_download": [],
+  "books_without_alignment_quality_gate": [],
+  "alignment_totals": {
+    "identico": 7597,
+    "sem-par": 335,
+    "deslocado": 21
+  },
+  "alignment_quality": {
+    "Matt": {
+      "verses": 1071,
+      "odd_fraction": 0.006,
+      "aligned": true
+    },
+    "Mark": {
+      "verses": 678,
+      "odd_fraction": 0.009,
+      "aligned": true
+    },
+    "Luke": {
+      "verses": 1150,
+      "odd_fraction": 0.01,
+      "aligned": true
+    },
+    "John": {
+      "verses": 879,
+      "odd_fraction": 0.013,
+      "aligned": true
+    },
+    "Acts": {
+      "verses": 1004,
+      "odd_fraction": 0.033,
+      "aligned": true
+    },
+    "Rom": {
+      "verses": 433,
+      "odd_fraction": 0.053,
+      "aligned": true
+    },
+    "1Cor": {
+      "verses": 437,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "2Cor": {
+      "verses": 257,
+      "odd_fraction": 0.043,
+      "aligned": true
+    },
+    "Gal": {
+      "verses": 149,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Eph": {
+      "verses": 155,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Phil": {
+      "verses": 104,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Col": {
+      "verses": 95,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "1Thess": {
+      "verses": 89,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "2Thess": {
+      "verses": 47,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "1Tim": {
+      "verses": 113,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "2Tim": {
+      "verses": 83,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Titus": {
+      "verses": 46,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Phlm": {
+      "verses": 25,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Heb": {
+      "verses": 303,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Jas": {
+      "verses": 108,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "1Pet": {
+      "verses": 105,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "2Pet": {
+      "verses": 61,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "1John": {
+      "verses": 105,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "2John": {
+      "verses": 13,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "3John": {
+      "verses": 14,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Jude": {
+      "verses": 25,
+      "odd_fraction": 0.0,
+      "aligned": true
+    },
+    "Rev": {
+      "verses": 404,
+      "odd_fraction": 0.012,
+      "aligned": true
+    }
+  },
+  "name_audit_filter": {
+    "dropped": 335,
+    "by_book_label": {
+      "Matt": {
+        "identico": {
+          "ok": 183,
+          "n": 228,
+          "rate": 0.8,
+          "kept": true
+        },
+        "incerto": {
+          "ok": 1,
+          "n": 2,
+          "rate": 0.5,
+          "kept": false
+        },
+        "deslocado": {
+          "ok": 2,
+          "n": 2,
+          "rate": 1.0,
+          "kept": false
+        }
+      },
+      "Mark": {
+        "identico": {
+          "ok": 100,
+          "n": 122,
+          "rate": 0.82,
+          "kept": true
+        },
+        "incerto": {
+          "ok": 0,
+          "n": 1,
+          "rate": 0.0,
+          "kept": false
+        },
+        "deslocado": {
+          "ok": 3,
+          "n": 9,
+          "rate": 0.33,
+          "kept": false
+        }
+      },
+      "Luke": {
+        "identico": {
+          "ok": 195,
+          "n": 238,
+          "rate": 0.82,
+          "kept": true
+        },
+        "incerto": {
+          "ok": 1,
+          "n": 1,
+          "rate": 1.0,
+          "kept": false
+        }
+      },
+      "John": {
+        "identico": {
+          "ok": 235,
+          "n": 276,
+          "rate": 0.85,
+          "kept": true
+        },
+        "deslocado": {
+          "ok": 5,
+          "n": 7,
+          "rate": 0.71,
+          "kept": false
+        },
+        "incerto": {
+          "ok": 4,
+          "n": 4,
+          "rate": 1.0,
+          "kept": false
+        }
+      },
+      "Acts": {
+        "identico": {
+          "ok": 389,
+          "n": 461,
+          "rate": 0.84,
+          "kept": true
+        },
+        "incerto": {
+          "ok": 11,
+          "n": 20,
+          "rate": 0.55,
+          "kept": false
+        },
+        "deslocado": {
+          "ok": 10,
+          "n": 10,
+          "rate": 1.0,
+          "kept": true
+        }
+      },
+      "Rom": {
+        "identico": {
+          "ok": 85,
+          "n": 101,
+          "rate": 0.84,
+          "kept": true
+        },
+        "incerto": {
+          "ok": 6,
+          "n": 12,
+          "rate": 0.5,
+          "kept": false
+        }
+      },
+      "1Cor": {
+        "identico": {
+          "ok": 79,
+          "n": 85,
+          "rate": 0.93,
+          "kept": true
+        }
+      },
+      "2Cor": {
+        "identico": {
+          "ok": 60,
+          "n": 62,
+          "rate": 0.97,
+          "kept": true
+        },
+        "incerto": {
+          "ok": 3,
+          "n": 4,
+          "rate": 0.75,
+          "kept": false
+        }
+      },
+      "Gal": {
+        "identico": {
+          "ok": 52,
+          "n": 55,
+          "rate": 0.95,
+          "kept": true
+        }
+      },
+      "Eph": {
+        "identico": {
+          "ok": 46,
+          "n": 46,
+          "rate": 1.0,
+          "kept": true
+        }
+      },
+      "Phil": {
+        "identico": {
+          "ok": 44,
+          "n": 46,
+          "rate": 0.96,
+          "kept": true
+        }
+      },
+      "Col": {
+        "identico": {
+          "ok": 37,
+          "n": 37,
+          "rate": 1.0,
+          "kept": true
+        }
+      },
+      "1Thess": {
+        "identico": {
+          "ok": 18,
+          "n": 22,
+          "rate": 0.82,
+          "kept": true
+        }
+      },
+      "2Thess": {
+        "identico": {
+          "ok": 11,
+          "n": 12,
+          "rate": 0.92,
+          "kept": true
+        }
+      },
+      "1Tim": {
+        "identico": {
+          "ok": 20,
+          "n": 22,
+          "rate": 0.91,
+          "kept": true
+        }
+      },
+      "2Tim": {
+        "identico": {
+          "ok": 24,
+          "n": 26,
+          "rate": 0.92,
+          "kept": true
+        }
+      },
+      "Titus": {
+        "identico": {
+          "ok": 6,
+          "n": 10,
+          "rate": 0.6,
+          "kept": false
+        }
+      },
+      "Phlm": {
+        "identico": {
+          "ok": 11,
+          "n": 11,
+          "rate": 1.0,
+          "kept": true
+        }
+      },
+      "Heb": {
+        "identico": {
+          "ok": 36,
+          "n": 45,
+          "rate": 0.8,
+          "kept": true
+        }
+      },
+      "Jas": {
+        "identico": {
+          "ok": 6,
+          "n": 6,
+          "rate": 1.0,
+          "kept": true
+        }
+      },
+      "1Pet": {
+        "identico": {
+          "ok": 20,
+          "n": 22,
+          "rate": 0.91,
+          "kept": true
+        }
+      },
+      "2Pet": {
+        "identico": {
+          "ok": 12,
+          "n": 13,
+          "rate": 0.92,
+          "kept": true
+        }
+      },
+      "1John": {
+        "identico": {
+          "ok": 15,
+          "n": 24,
+          "rate": 0.62,
+          "kept": false
+        }
+      },
+      "2John": {
+        "identico": {
+          "ok": 4,
+          "n": 6,
+          "rate": 0.67,
+          "kept": true
+        }
+      },
+      "3John": {
+        "identico": {
+          "ok": 1,
+          "n": 1,
+          "rate": 1.0,
+          "kept": true
+        }
+      },
+      "Jude": {
+        "identico": {
+          "ok": 8,
+          "n": 10,
+          "rate": 0.8,
+          "kept": true
+        }
+      },
+      "Rev": {
+        "identico": {
+          "ok": 49,
+          "n": 63,
+          "rate": 0.78,
+          "kept": true
+        },
+        "incerto": {
+          "ok": 0,
+          "n": 1,
+          "rate": 0.0,
+          "kept": false
+        }
+      }
+    }
+  },
+  "license_note": "Byzantine Textform (Robinson-Pierpont): domínio público (LICENSE.txt do repositório byztxt)."
+}

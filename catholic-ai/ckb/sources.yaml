@@ -19,7 +19,7 @@ sources:
     authority: escritura
     language: pt
     license_status: verificar
-    license_note: Tradução católica antiga, provável domínio público; confirmar edição e grafia digital.
+    license_note: Tradução católica antiga, provável domínio público; confirmar edição e grafia digital. Busca - sem texto digital livre acessível (só scans Princeton/Atla).
     ref_format: "Livro cap,vers"
     versification: vulgata
   - id: douay_rheims
@@ -97,11 +97,11 @@ sources:
     ref_format: "Livro cap,vers"
     versification: na
   - id: lxx_swete
-    title: Septuaginta (Swete, 1909) - inclui deuterocanônicos
+    title: Septuaginta (Swete, 1901) - inclui deuterocanônicos
     authority: escritura
     language: grc
-    license_status: verificar
-    license_note: Hipótese - Swete em domínio público; a edição de Rahlfs (1935) tem direitos. Confirmar edição digital.
+    license_status: livre
+    license_note: Swete 1901 (domínio público) transcrito pelo First1KGreek / Open Greek and Latin, CC BY-SA 4.0 (licença no cabeçalho de cada XML). Atribuição obrigatória; o arquivo derivado fica sob a mesma licença (ver ckb/corpus/lxx_swete.LICENSE.md).
     ref_format: "Livro cap,vers"
     versification: vulgata
   - id: wlc_hebrew
@@ -127,15 +127,15 @@ sources:
     authority: escritura
     language: it
     license_status: verificar
-    license_note: Hipótese - domínio público. A tradução CEI atual tem direitos reservados.
+    license_note: Hipótese - domínio público. A tradução CEI atual tem direitos reservados. Busca em 2026 - nenhum texto digital livre acessível (só scans/Wikisource). Alternativa - OCR do Wikisource it.
     ref_format: "Livro cap,vers"
     versification: vulgata
   - id: allioli_de
-    title: Bibel, trad. Joseph Franz Allioli (séc. XIX, da Vulgata)
+    title: Bibel, trad. Joseph Franz Allioli (ed. 1914, da Vulgata)
     authority: escritura
     language: de
-    license_status: verificar
-    license_note: Hipótese - domínio público (edições originais). A Einheitsübersetzung tem direitos.
+    license_status: livre
+    license_note: Allioli (+1873), ed. 1914, domínio público por idade; texto digital de github.com/AlexBocken/allioli (Unlicense). Cobre 68 de 73 livros (faltam 1-2 Reis, Esdras, Romanos, Hebreus). Confirmar a procedência da transcrição.
     ref_format: "Livro cap,vers"
     versification: vulgata
   - id: torres_amat_es
@@ -143,7 +143,7 @@ sources:
     authority: escritura
     language: es
     license_status: verificar
-    license_note: Hipótese - domínio público. Alternativa - Scío de San Miguel.
+    license_note: Hipótese - domínio público. Alternativa - Scío de San Miguel. Busca - só scans (Internet Archive, Atla); OCR com erros. Scío idem. A Platense (Straubinger, scrollmapper) tem direitos incertos - não usada.
     ref_format: "Livro cap,vers"
     versification: vulgata
   - id: crampon_fr
@@ -151,7 +151,7 @@ sources:
     authority: escritura
     language: fr
     license_status: verificar
-    license_note: Hipótese - domínio público. A Bible de Jérusalem e a TOB têm direitos. Confirmar a numeração dos Salmos da edição (hebraica assumida).
+    license_note: Hipótese - domínio público. A Bible de Jérusalem e a TOB têm direitos. Confirmar a numeração dos Salmos da edição (hebraica assumida). Crampon 1923 existe no scrollmapper (73 livros, pipeline pronto), mas a edição de 1923 é revisão coletiva com direitos incertos - não incluída.
     ref_format: "Livro cap,vers"
     versification: hebraica
 
@@ -198,3 +198,21 @@ sources:
     license_status: verificar
     license_note: LEV; ver condições em vatican.va.
     ref_format: "CIC §N"
+
+  # ---- Convertidos nesta etapa ---------------------------------------------------------------
+  - id: byz_nt
+    title: Novo Testamento grego - Byzantine Textform (Robinson-Pierpont)
+    authority: escritura
+    language: grc
+    license_status: livre
+    license_note: LICENSE.txt do repositório byztxt/byzantine-majority-text declara domínio público (Unlicense); README - "All the code and text ... is in the Public Domain". Texto bizantino (não o crítico NA/UBS).
+    ref_format: "Livro cap,vers"
+    versification: na
+  - id: fr_lxx_giguet
+    title: La Septante, trad. Pierre Giguet (1872) - só Antigo Testamento
+    authority: escritura
+    language: fr
+    license_status: livre
+    license_note: Hipótese - tradução de 1872, domínio público por idade; fonte digital scrollmapper/bible_databases (MIT). Numeração da LXX. Sem Novo Testamento.
+    ref_format: "Livro cap,vers"
+    versification: na

@@ -23,7 +23,7 @@ from collections import Counter
 from datetime import date
 from pathlib import Path
 
-from ckb.align import align
+from ckb.align import classify_book
 from ckb.books_map import STRUCTURAL
 from ckb.psalms import hebrew_to_vulgate
 from ckb.schema import CKB_DIR
@@ -87,30 +87,15 @@ def load_latin() -> dict[str, list[tuple[tuple[int, int], int]]]:
     return out
 
 
-def classify(verses, lat) -> list[dict]:
-    """Alinha um livro (não-Salmos). Retorna, por versículo hebraico, canon_refs e rótulo."""
-    beads = align([letters(t) for _, _, t in verses], [n for _, n in lat])
-    res = [{"refs": [], "label": ""} for _ in verses]
-    odd = set()  # índices próximos de beads não 1:1
-    for k, (hi, li) in enumerate(beads):
-        if len(hi) == 1 and len(li) == 1:
-            continue
-        for i in range(max(0, hi[0] - 2 if hi else 0), min(len(verses), (hi[-1] + 3) if hi else 0)):
-            odd.add(i)
-    pos = 0
-    for hi, li in beads:
-        for i in hi:
-            if li:
-                res[i]["refs"] = [lat[j][0] for j in li][:2]
-                same = len(hi) == len(li) == 1 and lat[li[0]][0] == (verses[i][0], verses[i][1])
-                res[i]["label"] = "incerto" if (i in odd or len(hi) != len(li)) else (
-                    "identico" if same else "deslocado")
-    return res
+def classify(verses, lat) -> tuple[list[dict], dict]:
+    """Alinha um livro (não-Salmos) à Vulgata; ver ckb.align.classify_book."""
+    return classify_book([(c, v) for c, v, _ in verses], [letters(t) for _, _, t in verses], lat)
 
 
 def main(folder: str) -> None:
     folder_p, latin = Path(folder), load_latin()
     rows, stats, missing, sha = [], {}, [], hashlib.sha256()
+    quality = {}
     for b in OSHB_BOOKS:
         raw = (folder_p / f"{b}.xml").read_bytes()
         sha.update(raw)
@@ -124,7 +109,8 @@ def main(folder: str) -> None:
         elif b in STRUCTURAL:  # Ester/Daniel: acréscimos gregos, regra estrutural
             res = [{"refs": [STRUCTURAL[b](c, v)], "label": "estrutural"} for c, v, _ in verses]
         else:
-            res = classify(verses, latin[b])
+            res, qs = classify(verses, latin[b])
+            quality[b] = qs
         for (c, v, text), a in zip(verses, res):
             if not text:
                 missing.append(f"{abbr} {c},{v}")
@@ -147,7 +133,7 @@ def main(folder: str) -> None:
     prov = {
         "source_id": SOURCE_ID, "converted_on": date.today().isoformat(), "input_url": SOURCE_URL,
         "input_sha256_of_concatenated_books": sha.hexdigest(), "books": len(OSHB_BOOKS),
-        "passages": len(rows), "alignment_totals": dict(total), "alignment_by_book": stats,
+        "passages": len(rows), "alignment_totals": dict(total), "alignment_by_book": stats, "alignment_quality": quality,
         "empty_verses_in_input": missing,
         "license_note": "Texto do WLC em domínio público; lematização/morfologia (não usadas) CC BY 4.0 (OSHB).",
     }
