@@ -18,7 +18,8 @@ cd catholic-ai
 python -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
 cp .env.example .env            # preencha as chaves
-python -m scripts.ingest data/sample/biblia_exemplo.jsonl
+python -m scripts.ckb_validate
+python -m scripts.ingest douay_rheims
 uvicorn app.main:app --reload
 pytest
 ```
@@ -26,8 +27,8 @@ Para testar o webhook, exponha a porta (ngrok/cloudflared) e configure a URL
 `/webhook` + `WHATSAPP_VERIFY_TOKEN` no painel Meta for Developers (WhatsApp → Configuration).
 
 ## Formato do corpus (JSONL)
-`{"text","ref","source","authority"}` — `authority`: `escritura | magisterio | padres | teologo`.
-Um trecho = unidade natural (parágrafo do CIC, versículo, artigo da Suma).
+Corpus em `ckb/corpus/<source_id>.jsonl`, fontes em `ckb/sources.yaml`.
+Ver `ckb/README.md`.
 
 ## Decisões de design
 - **Fundamentação acima de fluência**: relevância mínima (`MIN_SCORE`) e prompt que proíbe citar além das fontes.

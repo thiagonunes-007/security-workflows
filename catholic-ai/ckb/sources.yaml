@@ -1,0 +1,85 @@
+# Registro de fontes do CKB (Catholic Knowledge Base).
+# license_status:
+#   livre      -> domínio público ou licença que permite uso/indexação
+#   licenciado -> temos autorização escrita (anexe em license_note)
+#   verificar  -> NÃO ingerir ainda; falta confirmar direitos
+#   bloqueado  -> não usar
+# Os status abaixo são HIPÓTESES iniciais: confirme cada edição/tradução exata antes de ingerir.
+sources:
+  - id: vulgata_clementina
+    title: Vulgata Clementina (latim)
+    authority: escritura
+    language: la
+    license_status: livre
+    license_note: Texto latino antigo, domínio público. Conferir a edição digital usada.
+    ref_format: "Livro cap,vers"
+  - id: biblia_figueiredo
+    title: Bíblia, trad. Pe. Antônio Pereira de Figueiredo (1778, da Vulgata)
+    authority: escritura
+    language: pt
+    license_status: verificar
+    license_note: Tradução católica antiga, provável domínio público; confirmar edição e grafia digital.
+    ref_format: "Livro cap,vers"
+  - id: douay_rheims
+    title: Douay-Rheims (inglês)
+    authority: escritura
+    language: en
+    license_status: livre
+    license_note: Domínio público (edição Challoner revisada pode variar; conferir).
+    ref_format: "Livro cap,vers"
+  - id: biblia_almeida_arc
+    title: Bíblia Almeida Revista e Corrigida
+    authority: escritura
+    language: pt
+    license_status: bloqueado
+    license_note: Tradução protestante SEM os livros deuterocanônicos; não serve como base católica.
+    ref_format: "Livro cap,vers"
+  - id: cic
+    title: Catecismo da Igreja Católica
+    authority: magisterio
+    language: pt
+    license_status: verificar
+    license_note: Direitos da Libreria Editrice Vaticana / edições nacionais. Solicitar licença.
+    ref_format: "CIC §N"
+  - id: vaticano_ii
+    title: Documentos do Concílio Vaticano II
+    authority: magisterio
+    language: pt
+    license_status: verificar
+    license_note: Publicados em vatican.va; ler condições de reprodução da LEV.
+    ref_format: "Sigla n. N (ex.: LG 11)"
+  - id: cdc_1983
+    title: Código de Direito Canônico (1983)
+    authority: magisterio
+    language: pt
+    license_status: verificar
+    license_note: Verificar licença da edição portuguesa/brasileira.
+    ref_format: "cân. N"
+  - id: enciclicas
+    title: Encíclicas e exortações apostólicas
+    authority: magisterio
+    language: pt
+    license_status: verificar
+    license_note: Vatican.va; confirmar condições de uso.
+    ref_format: "Documento n. N"
+  - id: denzinger
+    title: Denzinger-Hünermann (Enchiridion Symbolorum)
+    authority: magisterio
+    language: pt
+    license_status: verificar
+    license_note: Edições modernas são protegidas; avaliar edição antiga em domínio público.
+    ref_format: "DH N"
+  - id: padres_nicenos
+    title: Padres da Igreja (Ante-Nicene / Nicene / Post-Nicene Fathers)
+    authority: padres
+    language: en
+    license_status: livre
+    license_note: Traduções do séc. XIX, domínio público (CCEL / New Advent).
+    ref_format: "Autor, Obra, livro.cap"
+  - id: suma_dominicanos
+    title: Suma Teológica (trad. inglesa dos Dominicanos, 1920)
+    authority: teologo
+    language: en
+    license_status: livre
+    license_note: Tradução de 1920, domínio público. Edições em português são protegidas.
+    ref_format: "ST I, q.N, a.N"

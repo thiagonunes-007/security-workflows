@@ -1,35 +1,35 @@
-"""Ingere fontes em JSONL no banco vetorial.
+"""Ingere fontes do CKB no banco vetorial, SOMENTE se a licença permitir.
 
-Cada linha: {"text": "...", "ref": "Jo 3,16", "source": "Bíblia (ARC)", "authority": "escritura"}
-Uso: python -m scripts.ingest data/sample/biblia_exemplo.jsonl
+Uso: python -m scripts.ingest vulgata_clementina douay_rheims
 """
 import hashlib
-import json
 import sys
 
 from app.config import get_settings
 from app.rag import get_collection
+from ckb.schema import load_passages, load_registry
 
-REQUIRED = {"text", "ref", "source"}
 
-
-def main(paths: list[str]) -> None:
+def main(source_ids: list[str]) -> None:
+    reg = load_registry()
     col = get_collection(get_settings())
-    for path in paths:
-        ids, docs, metas = [], [], []
-        with open(path, encoding="utf-8") as f:
-            for n, line in enumerate(f, 1):
-                if not line.strip():
-                    continue
-                row = json.loads(line)
-                missing = REQUIRED - row.keys()
-                if missing:
-                    raise ValueError(f"{path}:{n} faltam campos {missing}")
-                ids.append(hashlib.sha1(f"{row['source']}|{row['ref']}".encode()).hexdigest())
-                docs.append(row["text"])
-                metas.append({k: row.get(k, "") for k in ("ref", "source", "authority")})
-        col.upsert(ids=ids, documents=docs, metadatas=metas)
-        print(f"{path}: {len(ids)} trechos")
+    for sid in source_ids:
+        src = reg.get(sid)
+        if src is None:
+            raise SystemExit(f"fonte desconhecida: {sid}")
+        if not src.ingestable:
+            raise SystemExit(f"{sid}: licença '{src.license_status}' — ingestão bloqueada")
+        ps = load_passages(sid)
+        col.upsert(
+            ids=[hashlib.sha1(f"{p.source_id}|{p.ref}".encode()).hexdigest() for p in ps],
+            documents=[p.text for p in ps],
+            metadatas=[
+                {"ref": p.ref, "source": src.title, "authority": src.authority,
+                 "language": src.language, "section": p.section}
+                for p in ps
+            ],
+        )
+        print(f"{sid}: {len(ps)} trechos")
 
 
 if __name__ == "__main__":
