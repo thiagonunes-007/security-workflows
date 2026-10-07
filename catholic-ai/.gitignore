@@ -4,3 +4,7 @@ __pycache__/
 .venv/
 data/chroma/
 .env
+
+# documentos ainda sem licença confirmada e catálogos locais
+ckb/staging/
+catalog*.local.yaml

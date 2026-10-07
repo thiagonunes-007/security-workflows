@@ -12,6 +12,9 @@ dependencies = [
   "sentence-transformers>=3.0",
   "pydantic-settings>=2.4",
   "pyyaml>=6",
+  "beautifulsoup4>=4.12",
+  "lxml>=5",
+  "python-docx>=1.1",
 ]
 
 [project.optional-dependencies]
