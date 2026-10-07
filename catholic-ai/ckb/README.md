@@ -33,3 +33,13 @@ a evidência registrada em `license_note`.
 - Bíblia católica precisa dos **deuterocanônicos**: a Almeida (protestante) está bloqueada.
 - Muitas fontes livres estão em latim/inglês; o embedding multilíngue permite buscar em português,
   mas as citações exibidas devem ser traduzidas com cuidado (ou priorizar fontes em português licenciadas).
+
+## Fonte pronta: Douay-Rheims (Challoner)
+```bash
+curl -sSLO https://raw.githubusercontent.com/scrollmapper/bible_databases/master/formats/json/DRC.json
+python -m scripts.convert_douay_rheims DRC.json      # --window N agrupa N versículos
+python -m scripts.ckb_validate && python -m scripts.ingest douay_rheims
+```
+Gera `corpus/douay_rheims.jsonl` (73 livros, refs como `Jo 3,16`) e `.provenance.json` (URL, sha256,
+lacunas). Salmos usam a numeração da Vulgata. **12 versículos vêm vazios na fonte** (listados no
+provenance); completar a partir de outra edição antes de publicar.

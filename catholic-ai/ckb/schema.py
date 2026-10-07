@@ -31,14 +31,17 @@ class Passage(BaseModel):
 
     source_id: str
     ref: str = Field(min_length=1)  # ex.: "CIC §1213"
-    text: str = Field(min_length=20)
+    text: str
     section: str = ""  # breadcrumb opcional: "Parte I > Seção 2"
     language: str = ""
 
     @field_validator("text")
     @classmethod
     def no_blank(cls, v: str) -> str:
-        return " ".join(v.split())
+        v = " ".join(v.split())
+        if not v:
+            raise ValueError("texto vazio")
+        return v
 
 
 def load_registry(path: Path = CKB_DIR / "sources.yaml") -> dict[str, Source]:

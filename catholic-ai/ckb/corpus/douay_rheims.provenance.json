@@ -1,0 +1,24 @@
+{
+  "source_id": "douay_rheims",
+  "converted_on": "2026-10-07",
+  "input_url": "https://raw.githubusercontent.com/scrollmapper/bible_databases/master/formats/json/DRC.json",
+  "input_sha256": "7575ae63082a69d22e6781e036dd829e3779c169e203c3c38b69e2444ac59d42",
+  "window": 1,
+  "books": 73,
+  "passages": 35805,
+  "empty_verses_in_input": [
+    "2Sm 13,39",
+    "1Rs 17,19",
+    "Sl 150,6",
+    "Pr 30,29",
+    "Eclo 29,35",
+    "Is 46,13",
+    "Br 6,37",
+    "Jo 11,57",
+    "2Cor 1,24",
+    "1Ts 4,18",
+    "2Ts 2,17",
+    "3Jo 1,15"
+  ],
+  "note": "Versículos vazios na fonte foram omitidos; completar manualmente a partir de outra edição."
+}

@@ -12,11 +12,11 @@ def test_registry_loads_and_gates_licenses():
     assert reg["vulgata_clementina"].license_status in INGESTABLE
 
 
-def test_passage_normalizes_whitespace_and_rejects_short():
+def test_passage_normalizes_whitespace_and_rejects_blank():
     p = Passage(source_id="x", ref="a", text="uma   frase\n com espaços   estranhos ok")
     assert p.text == "uma frase com espaços estranhos ok"
     with pytest.raises(Exception):
-        Passage(source_id="x", ref="a", text="curto")
+        Passage(source_id="x", ref="a", text="   ")
 
 
 def test_duplicate_ref_rejected(tmp_path):
