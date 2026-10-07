@@ -68,7 +68,8 @@ def test_structural_boundaries_match_latin_text():
     assert "Non nobis" in lat[(113, 9)][:40]  # Heb 115,1
     assert "Credidi" in lat[(115, 1)][:40]  # Heb 116,10
     assert "Lauda" in lat[(147, 1)][:40]  # Heb 147,12
-    assert "In exitu" in lat[(114, 1)][:40]  # Heb 114,1
+    assert "In exitu" in lat[(113, 1)][:40]  # Heb 114,1
+    assert "Dilexi" in lat[(114, 1)][:40]  # Heb 116,1
 
 
 def test_confidence_levels_and_bad_input():
