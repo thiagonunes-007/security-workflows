@@ -57,7 +57,8 @@ usa o texto normalizado; o original fica em metadado e é o que se exibe.
 
 **Armadilhas**
 - Salmos: Vulgata/LXX × hebraica têm numeração diferente. `canon_ref` usa Vulgata; fontes
-  `versification: hebraica` precisam de mapeamento no conversor (ainda não implementado).
+  `versification: hebraica` devem usar `ckb/psalms.py` (`hebrew_canon_refs`). Detalhes, nível de
+  confiança e limites em `ckb/PSALMS.md`.
 - Hebraico só cobre o protocanônico; deuterocanônicos vêm do grego/latim.
 - Embeddings: latim, grego antigo e hebraico bíblico são mal cobertos por modelos pequenos. Em produção
   teste `BAAI/bge-m3` (100+ línguas) contra o conjunto de avaliação; o alinhamento por `canon_ref`
