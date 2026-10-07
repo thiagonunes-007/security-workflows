@@ -13,6 +13,7 @@ def test_nine_languages():
 def test_normalize_hebrew_and_greek():
     assert normalize_for_search("בְּרֵאשִׁ֖ית בָּרָ֣א", "hbo") == "בראשית ברא"
     assert normalize_for_search("Ἐν ἀρχῇ ἦν ὁ λόγος", "grc") == "εν αρχη ην ο λογοσ"
+    assert normalize_for_search("In principio creavit cælum et tenebræ", "la") == "In principio creavit caelum et tenebrae"
     assert normalize_for_search("In  principio\n erat", "la") == "In principio erat"
 
 

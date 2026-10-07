@@ -1,4 +1,4 @@
-from scripts.convert_douay_rheims import BOOKS, convert
+from scripts.convert_scrollmapper_bible import BOOKS, convert
 
 
 def fake(books):
@@ -32,3 +32,10 @@ def test_non_canonical_books_dropped():
     data = full({"Laodiceans": [{"chapter": 1, "verses": [{"verse": 1, "text": "x"}]}]})
     rows, _ = convert(data)
     assert not any("Laodiceans" in r["section"] for r in rows)
+
+
+def test_latin_source_sets_language_and_source_id():
+    data = full({"John": [{"chapter": 3, "verses": [{"verse": 16, "text": "Sic enim Deus dilexit mundum"}]}]})
+    rows, _ = convert(data, "vulgata_clementina", "la")
+    jo = next(r for r in rows if r["ref"] == "Jo 3,16")
+    assert (jo["source_id"], jo["language"], jo["canon_ref"]) == ("vulgata_clementina", "la", "John.3.16")

@@ -1,15 +1,18 @@
-"""Converte a Bíblia Douay-Rheims (Challoner) para o formato do CKB.
+"""Converte Bíblias do scrollmapper/bible_databases (JSON) para o formato do CKB.
 
-Entrada: JSON do scrollmapper/bible_databases (formats/json/DRC.json):
+Fontes suportadas (PRESETS): douay_rheims (en), vulgata_clementina (la).
+Entrada (exemplos):
   curl -sSLO https://raw.githubusercontent.com/scrollmapper/bible_databases/master/formats/json/DRC.json
-Saída: ckb/corpus/douay_rheims.jsonl + ckb/corpus/douay_rheims.provenance.json
+  curl -sSLO https://raw.githubusercontent.com/scrollmapper/bible_databases/master/formats/json/VulgClementine.json
+Saída: ckb/corpus/<source_id>.jsonl + ckb/corpus/<source_id>.provenance.json
 
-Uso: python -m scripts.convert_douay_rheims DRC.json [--window N]
+Uso: python -m scripts.convert_scrollmapper_bible douay_rheims DRC.json [--window N]
+     python -m scripts.convert_scrollmapper_bible vulgata_clementina VulgClementine.json
 
 - Mantém só os 73 livros do cânon católico (descarta Oração de Manassés, 1-2 Esdras apócrifos,
-  Salmo adicional e Laodicenses, presentes no arquivo mas fora do cânon de Trento).
+  Salmo adicional e Laodicenses, presentes nos arquivos mas fora do cânon de Trento).
 - Referências em abreviaturas da Bíblia em português (Jo 3,16). Salmos seguem a numeração da
-  Vulgata (usada pelo Douay-Rheims), que difere da hebraica em muitos salmos.
+  Vulgata (usada por Douay-Rheims e Vulgata), que difere da hebraica em muitos salmos.
 - canon_ref (ex.: John.3.16) alinha o versículo com o mesmo versículo em outras línguas; só é
   gerado com --window 1 (janelas maiores quebram o alinhamento).
 - --window N agrupa N versículos consecutivos do mesmo capítulo ("Jo 3,16-19"). Padrão 1 (um
@@ -24,8 +27,12 @@ from pathlib import Path
 
 from ckb.schema import CKB_DIR
 
-SOURCE_ID = "douay_rheims"
-SOURCE_URL = "https://raw.githubusercontent.com/scrollmapper/bible_databases/master/formats/json/DRC.json"
+BASE_URL = "https://raw.githubusercontent.com/scrollmapper/bible_databases/master/formats/json/"
+# source_id -> (idioma, arquivo)
+PRESETS = {
+    "douay_rheims": ("en", "DRC.json"),
+    "vulgata_clementina": ("la", "VulgClementine.json"),
+}
 
 # nome no arquivo -> (abreviatura pt-BR, nome)
 BOOKS = {
@@ -74,7 +81,9 @@ def clean(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
-def convert(data: dict, window: int = 1) -> tuple[list[dict], list[str]]:
+def convert(
+    data: dict, source_id: str = "douay_rheims", language: str = "en", window: int = 1
+) -> tuple[list[dict], list[str]]:
     rows, gaps, seen_books = [], [], set()
     for book in data["books"]:
         abbr = BOOKS.get(book["name"])
@@ -95,13 +104,13 @@ def convert(data: dict, window: int = 1) -> tuple[list[dict], list[str]]:
                 span = f"{first}" if first == last else f"{first}-{last}"
                 rows.append(
                     {
-                        "source_id": SOURCE_ID,
+                        "source_id": source_id,
                         "canon_ref": f"{OSIS[book['name']]}.{ch['chapter']}.{first}" if window == 1 else "",
                         "ref": f"{abbr} {ch['chapter']},{span}",
                         "text": " ".join(t for _, t in grp),
                         "section": f"{book['name']} {ch['chapter']}"
                         + (" (numeração da Vulgata)" if abbr == "Sl" else ""),
-                        "language": "en",
+                        "language": language,
                     }
                 )
     missing = set(BOOKS) - seen_books
@@ -112,22 +121,24 @@ def convert(data: dict, window: int = 1) -> tuple[list[dict], list[str]]:
 
 def main() -> None:
     ap = argparse.ArgumentParser()
+    ap.add_argument("source_id", choices=sorted(PRESETS))
     ap.add_argument("input", type=Path)
     ap.add_argument("--window", type=int, default=1)
-    ap.add_argument("--source-url", default=SOURCE_URL)
     args = ap.parse_args()
+    language, filename = PRESETS[args.source_id]
+    source_url = BASE_URL + filename
 
     raw = args.input.read_bytes()
-    rows, gaps = convert(json.loads(raw), args.window)
+    rows, gaps = convert(json.loads(raw), args.source_id, language, args.window)
 
-    out = CKB_DIR / "corpus" / f"{SOURCE_ID}.jsonl"
+    out = CKB_DIR / "corpus" / f"{args.source_id}.jsonl"
     out.write_text(
         "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows), encoding="utf-8"
     )
     prov = {
-        "source_id": SOURCE_ID,
+        "source_id": args.source_id,
         "converted_on": date.today().isoformat(),
-        "input_url": args.source_url,
+        "input_url": source_url,
         "input_sha256": hashlib.sha256(raw).hexdigest(),
         "window": args.window,
         "books": len(BOOKS),

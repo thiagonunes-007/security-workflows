@@ -34,10 +34,10 @@ a evidência registrada em `license_note`.
 - Muitas fontes livres estão em latim/inglês; o embedding multilíngue permite buscar em português,
   mas as citações exibidas devem ser traduzidas com cuidado (ou priorizar fontes em português licenciadas).
 
-## Fonte pronta: Douay-Rheims (Challoner)
+## Fontes prontas: Douay-Rheims (en) e Vulgata Clementina (la)
 ```bash
 curl -sSLO https://raw.githubusercontent.com/scrollmapper/bible_databases/master/formats/json/DRC.json
-python -m scripts.convert_douay_rheims DRC.json      # --window N agrupa N versículos
+python -m scripts.convert_scrollmapper_bible douay_rheims DRC.json      # --window N agrupa N versículos
 python -m scripts.ckb_validate && python -m scripts.ingest douay_rheims
 ```
 Gera `corpus/douay_rheims.jsonl` (73 livros, refs como `Jo 3,16`) e `.provenance.json` (URL, sha256,
@@ -65,3 +65,9 @@ usa o texto normalizado; o original fica em metadado e é o que se exibe.
 - Mensagem de "sem fundamento" ainda é só em português.
 
 Cada fonte nova das línguas acima já está registrada em `sources.yaml` com status `verificar`.
+
+**Vulgata Clementina (latim):** `python -m scripts.convert_scrollmapper_bible vulgata_clementina VulgClementine.json`
+(arquivo `VulgClementine.json` do mesmo repositório). Mesmo formato e mesmo `canon_ref` da Douay-Rheims,
+então os dois se alinham versículo a versículo. A Vulgata fica em `corpus/vulgata_clementina.jsonl`,
+com 8 versículos vazios na fonte (listados no provenance). Na normalização de busca, as ligaduras
+`æ`/`œ` viram `ae`/`oe`; o texto original é preservado.

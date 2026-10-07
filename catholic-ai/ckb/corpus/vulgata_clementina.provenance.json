@@ -1,0 +1,20 @@
+{
+  "source_id": "vulgata_clementina",
+  "converted_on": "2026-10-07",
+  "input_url": "https://raw.githubusercontent.com/scrollmapper/bible_databases/master/formats/json/VulgClementine.json",
+  "input_sha256": "3138786288b72205f5944d629319dbadb3f49881317539789675162c44e0c766",
+  "window": 1,
+  "books": 73,
+  "passages": 35809,
+  "empty_verses_in_input": [
+    "Sl 15,11",
+    "Sl 42,6",
+    "Sl 125,7",
+    "Sl 135,27",
+    "Is 45,26",
+    "Jo 11,57",
+    "2Cor 1,24",
+    "3Jo 1,15"
+  ],
+  "note": "Versículos vazios na fonte foram omitidos; completar manualmente a partir de outra edição."
+}
