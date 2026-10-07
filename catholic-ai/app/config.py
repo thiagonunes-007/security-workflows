@@ -19,6 +19,9 @@ class Settings(BaseSettings):
     top_k: int = 6
     min_score: float = 0.35
 
+    # idiomas dos textos alinhados (canon_ref) anexados como contexto, ex.: originais
+    context_languages: str = "grc,hbo,la"
+
     phone_hash_salt: str = "change-me"
 
 

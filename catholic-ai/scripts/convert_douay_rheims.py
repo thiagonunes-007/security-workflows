@@ -10,6 +10,8 @@ Uso: python -m scripts.convert_douay_rheims DRC.json [--window N]
   Salmo adicional e Laodicenses, presentes no arquivo mas fora do cânon de Trento).
 - Referências em abreviaturas da Bíblia em português (Jo 3,16). Salmos seguem a numeração da
   Vulgata (usada pelo Douay-Rheims), que difere da hebraica em muitos salmos.
+- canon_ref (ex.: John.3.16) alinha o versículo com o mesmo versículo em outras línguas; só é
+  gerado com --window 1 (janelas maiores quebram o alinhamento).
 - --window N agrupa N versículos consecutivos do mesmo capítulo ("Jo 3,16-19"). Padrão 1 (um
   versículo por trecho, citação exata). Teste com o conjunto de avaliação antes de mudar.
 """
@@ -46,6 +48,27 @@ BOOKS = {
 }
 assert len(BOOKS) == 73
 
+# nome no arquivo -> id OSIS (chave neutra de idioma usada em canon_ref)
+OSIS = {
+    "Genesis": "Gen", "Exodus": "Exod", "Leviticus": "Lev", "Numbers": "Num", "Deuteronomy": "Deut",
+    "Joshua": "Josh", "Judges": "Judg", "Ruth": "Ruth", "I Samuel": "1Sam", "II Samuel": "2Sam",
+    "I Kings": "1Kgs", "II Kings": "2Kgs", "I Chronicles": "1Chr", "II Chronicles": "2Chr",
+    "Ezra": "Ezra", "Nehemiah": "Neh", "Tobit": "Tob", "Judith": "Jdt", "Esther": "Esth", "Job": "Job",
+    "Psalms": "Ps", "Proverbs": "Prov", "Ecclesiastes": "Eccl", "Song of Solomon": "Song",
+    "Wisdom": "Wis", "Sirach": "Sir", "Isaiah": "Isa", "Jeremiah": "Jer", "Lamentations": "Lam",
+    "Baruch": "Bar", "Ezekiel": "Ezek", "Daniel": "Dan", "Hosea": "Hos", "Joel": "Joel", "Amos": "Amos",
+    "Obadiah": "Obad", "Jonah": "Jonah", "Micah": "Mic", "Nahum": "Nah", "Habakkuk": "Hab",
+    "Zephaniah": "Zeph", "Haggai": "Hag", "Zechariah": "Zech", "Malachi": "Mal",
+    "I Maccabees": "1Macc", "II Maccabees": "2Macc", "Matthew": "Matt", "Mark": "Mark", "Luke": "Luke",
+    "John": "John", "Acts": "Acts", "Romans": "Rom", "I Corinthians": "1Cor", "II Corinthians": "2Cor",
+    "Galatians": "Gal", "Ephesians": "Eph", "Philippians": "Phil", "Colossians": "Col",
+    "I Thessalonians": "1Thess", "II Thessalonians": "2Thess", "I Timothy": "1Tim", "II Timothy": "2Tim",
+    "Titus": "Titus", "Philemon": "Phlm", "Hebrews": "Heb", "James": "Jas", "I Peter": "1Pet",
+    "II Peter": "2Pet", "I John": "1John", "II John": "2John", "III John": "3John", "Jude": "Jude",
+    "Revelation of John": "Rev",
+}
+assert set(OSIS) == set(BOOKS)
+
 
 def clean(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
@@ -73,6 +96,7 @@ def convert(data: dict, window: int = 1) -> tuple[list[dict], list[str]]:
                 rows.append(
                     {
                         "source_id": SOURCE_ID,
+                        "canon_ref": f"{OSIS[book['name']]}.{ch['chapter']}.{first}" if window == 1 else "",
                         "ref": f"{abbr} {ch['chapter']},{span}",
                         "text": " ".join(t for _, t in grp),
                         "section": f"{book['name']} {ch['chapter']}"

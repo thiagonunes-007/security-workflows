@@ -43,3 +43,25 @@ python -m scripts.ckb_validate && python -m scripts.ingest douay_rheims
 Gera `corpus/douay_rheims.jsonl` (73 livros, refs como `Jo 3,16`) e `.provenance.json` (URL, sha256,
 lacunas). Salmos usam a numeração da Vulgata. **12 versículos vêm vazios na fonte** (listados no
 provenance); completar a partir de outra edição antes de publicar.
+
+## Multilinguismo (9 idiomas)
+`grc` grego · `hbo` hebraico · `la` latim · `pt` · `en` · `it` · `de` · `es` · `fr`
+(códigos em `ckb/languages.py`; todo `Source.language` é validado contra essa lista).
+
+**Alinhamento por `canon_ref`** — chave neutra de idioma (`John.3.16`, `CIC.1213`). A busca semântica
+acha o trecho na língua mais próxima da pergunta; `rag.expand_aligned` anexa o mesmo trecho em
+grego/hebraico/latim (`CONTEXT_LANGUAGES`) para o modelo citar o original e traduzir.
+
+**Normalização para busca** — hebraico sem cantilação/niqqud, grego sem acentos/espíritos. O índice
+usa o texto normalizado; o original fica em metadado e é o que se exibe.
+
+**Armadilhas**
+- Salmos: Vulgata/LXX × hebraica têm numeração diferente. `canon_ref` usa Vulgata; fontes
+  `versification: hebraica` precisam de mapeamento no conversor (ainda não implementado).
+- Hebraico só cobre o protocanônico; deuterocanônicos vêm do grego/latim.
+- Embeddings: latim, grego antigo e hebraico bíblico são mal cobertos por modelos pequenos. Em produção
+  teste `BAAI/bge-m3` (100+ línguas) contra o conjunto de avaliação; o alinhamento por `canon_ref`
+  reduz a dependência do embedding nessas línguas.
+- Mensagem de "sem fundamento" ainda é só em português.
+
+Cada fonte nova das línguas acima já está registrada em `sources.yaml` com status `verificar`.

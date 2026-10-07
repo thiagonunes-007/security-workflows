@@ -17,6 +17,9 @@ class Passage:
     source: str  # ex.: "Catecismo da Igreja Católica"
     authority: str  # ex.: "escritura", "magisterio", "padres", "teologo"
     score: float
+    canon_ref: str = ""  # chave neutra de idioma (John.3.16, CIC.1213)
+    language: str = ""
+    aligned: bool = False  # True = trazido por alinhamento, não pela busca semântica
 
 
 def get_collection(settings: Settings):
@@ -33,15 +36,44 @@ def retrieve(collection, question: str, settings: Settings) -> list[Passage]:
     for doc, meta, dist in zip(res["documents"][0], res["metadatas"][0], res["distances"][0]):
         score = 1.0 - dist  # distância cosseno -> similaridade
         if score >= settings.min_score:
-            passages.append(
-                Passage(doc, meta["ref"], meta["source"], meta.get("authority", ""), score)
-            )
+            passages.append(_to_passage(doc, meta, score))
     return passages
+
+
+def _to_passage(doc: str, meta: dict, score: float, aligned: bool = False) -> Passage:
+    # o índice guarda texto normalizado (grego sem acentos, hebraico sem niqqud);
+    # exibimos o original quando existir
+    return Passage(
+        meta.get("original") or doc, meta["ref"], meta["source"], meta.get("authority", ""),
+        score, meta.get("canon_ref", ""), meta.get("language", ""), aligned,
+    )
+
+
+MAX_ALIGNED = 12
+
+
+def expand_aligned(collection, passages: list[Passage], langs: list[str]) -> list[Passage]:
+    """Anexa o MESMO trecho em outras línguas (ex.: grego/hebraico/latim) via canon_ref."""
+    refs = sorted({p.canon_ref for p in passages if p.canon_ref})
+    if not refs or not langs:
+        return []
+    res = collection.get(
+        where={"$and": [{"canon_ref": {"$in": refs}}, {"language": {"$in": langs}}]},
+        limit=MAX_ALIGNED,
+    )
+    have = {(p.canon_ref, p.source) for p in passages}
+    out = []
+    for doc, meta in zip(res["documents"], res["metadatas"]):
+        if (meta.get("canon_ref"), meta["source"]) not in have:
+            out.append(_to_passage(doc, meta, 0.0, aligned=True))
+    return out
 
 
 def format_sources(passages: list[Passage]) -> str:
     blocks = [
-        f'[{i}] ({p.authority}) {p.source} — {p.ref}\n{p.text}' for i, p in enumerate(passages, 1)
+        f'[{i}] ({p.authority}, {p.language or "?"}{", alinhado" if p.aligned else ""}) '
+        f'{p.source} — {p.ref}\n{p.text}'
+        for i, p in enumerate(passages, 1)
     ]
     return "<fontes>\n" + "\n\n".join(blocks) + "\n</fontes>"
 
@@ -56,6 +88,9 @@ def answer(
     passages = retrieve(collection, question, settings)
     if not passages:
         return NO_GROUNDING  # sem fundamento: nem chama o LLM
+
+    langs = [x.strip() for x in settings.context_languages.split(",") if x.strip()]
+    passages = passages + expand_aligned(collection, passages, langs)
 
     client = client or anthropic.Anthropic(api_key=settings.anthropic_api_key)
     user_msg = f"{format_sources(passages)}\n\nPergunta do usuário: {question}"

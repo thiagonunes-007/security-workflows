@@ -13,6 +13,7 @@ sources:
     license_status: livre
     license_note: Texto latino antigo, domínio público. Conferir a edição digital usada.
     ref_format: "Livro cap,vers"
+    versification: vulgata
   - id: biblia_figueiredo
     title: Bíblia, trad. Pe. Antônio Pereira de Figueiredo (1778, da Vulgata)
     authority: escritura
@@ -20,6 +21,7 @@ sources:
     license_status: verificar
     license_note: Tradução católica antiga, provável domínio público; confirmar edição e grafia digital.
     ref_format: "Livro cap,vers"
+    versification: vulgata
   - id: douay_rheims
     title: Douay-Rheims (inglês)
     authority: escritura
@@ -27,6 +29,7 @@ sources:
     license_status: livre
     license_note: Domínio público (edição Challoner revisada pode variar; conferir).
     ref_format: "Livro cap,vers"
+    versification: vulgata
   - id: biblia_almeida_arc
     title: Bíblia Almeida Revista e Corrigida
     authority: escritura
@@ -83,3 +86,115 @@ sources:
     license_status: livre
     license_note: Tradução de 1920, domínio público. Edições em português são protegidas.
     ref_format: "ST I, q.N, a.N"
+
+  # ---- Línguas originais (Escritura) ----------------------------------------------------
+  - id: sblgnt
+    title: SBL Greek New Testament
+    authority: escritura
+    language: grc
+    license_status: verificar
+    license_note: Hipótese - CC BY 4.0 com atribuição. Confirmar termos e requisitos de crédito.
+    ref_format: "Livro cap,vers"
+    versification: na
+  - id: lxx_swete
+    title: Septuaginta (Swete, 1909) - inclui deuterocanônicos
+    authority: escritura
+    language: grc
+    license_status: verificar
+    license_note: Hipótese - Swete em domínio público; a edição de Rahlfs (1935) tem direitos. Confirmar edição digital.
+    ref_format: "Livro cap,vers"
+    versification: vulgata
+  - id: wlc_hebrew
+    title: Westminster Leningrad Codex (Open Scriptures Hebrew Bible)
+    authority: escritura
+    language: hbo
+    license_status: verificar
+    license_note: Hipótese - texto em domínio público, OSHB sob CC BY 4.0. Só livros protocanônicos; numeração hebraica (Salmos) exige mapeamento para canon_ref.
+    ref_format: "Livro cap,vers"
+    versification: hebraica
+  - id: nova_vulgata
+    title: Nova Vulgata (edição oficial da Santa Sé)
+    authority: escritura
+    language: la
+    license_status: verificar
+    license_note: Texto oficial em latim publicado em vatican.va; direitos da LEV. Solicitar licença.
+    ref_format: "Livro cap,vers"
+    versification: vulgata
+
+  # ---- Traduções católicas históricas (candidatas a domínio público) ----------------------
+  - id: martini_it
+    title: Bibbia, trad. Antonio Martini (1769-1781, da Vulgata)
+    authority: escritura
+    language: it
+    license_status: verificar
+    license_note: Hipótese - domínio público. A tradução CEI atual tem direitos reservados.
+    ref_format: "Livro cap,vers"
+    versification: vulgata
+  - id: allioli_de
+    title: Bibel, trad. Joseph Franz Allioli (séc. XIX, da Vulgata)
+    authority: escritura
+    language: de
+    license_status: verificar
+    license_note: Hipótese - domínio público (edições originais). A Einheitsübersetzung tem direitos.
+    ref_format: "Livro cap,vers"
+    versification: vulgata
+  - id: torres_amat_es
+    title: Sagrada Biblia, trad. Félix Torres Amat (1823-25, da Vulgata)
+    authority: escritura
+    language: es
+    license_status: verificar
+    license_note: Hipótese - domínio público. Alternativa - Scío de San Miguel.
+    ref_format: "Livro cap,vers"
+    versification: vulgata
+  - id: crampon_fr
+    title: La Sainte Bible, trad. Augustin Crampon (1904)
+    authority: escritura
+    language: fr
+    license_status: verificar
+    license_note: Hipótese - domínio público. A Bible de Jérusalem e a TOB têm direitos. Confirmar a numeração dos Salmos da edição (hebraica assumida).
+    ref_format: "Livro cap,vers"
+    versification: hebraica
+
+  # ---- Catecismo (texto oficial em várias línguas; mesma chave CIC.N alinha todas) -------
+  - id: cic_la
+    title: Catechismus Catholicae Ecclesiae (latim, edição típica)
+    authority: magisterio
+    language: la
+    license_status: verificar
+    license_note: LEV; ver condições em vatican.va.
+    ref_format: "CIC §N"
+  - id: cic_en
+    title: Catechism of the Catholic Church (inglês)
+    authority: magisterio
+    language: en
+    license_status: verificar
+    license_note: Direitos da USCCB/LEV. Solicitar licença.
+    ref_format: "CIC §N"
+  - id: cic_it
+    title: Catechismo della Chiesa Cattolica (italiano)
+    authority: magisterio
+    language: it
+    license_status: verificar
+    license_note: LEV; ver condições em vatican.va.
+    ref_format: "CIC §N"
+  - id: cic_es
+    title: Catecismo de la Iglesia Católica (espanhol)
+    authority: magisterio
+    language: es
+    license_status: verificar
+    license_note: LEV; ver condições em vatican.va.
+    ref_format: "CIC §N"
+  - id: cic_fr
+    title: Catéchisme de l'Église catholique (francês)
+    authority: magisterio
+    language: fr
+    license_status: verificar
+    license_note: LEV; ver condições em vatican.va.
+    ref_format: "CIC §N"
+  - id: cic_de
+    title: Katechismus der Katholischen Kirche (alemão)
+    authority: magisterio
+    language: de
+    license_status: verificar
+    license_note: LEV; ver condições em vatican.va.
+    ref_format: "CIC §N"

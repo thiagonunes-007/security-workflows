@@ -6,6 +6,8 @@ from typing import Literal
 import yaml
 from pydantic import BaseModel, Field, field_validator
 
+from .languages import LANGUAGES
+
 CKB_DIR = Path(__file__).parent
 Authority = Literal["escritura", "magisterio", "padres", "teologo"]
 License = Literal["livre", "licenciado", "verificar", "bloqueado"]
@@ -20,6 +22,16 @@ class Source(BaseModel):
     license_status: License
     license_note: str = ""
     ref_format: str = ""
+    # Escritura: esquema de numeração. Salmos diferem entre Vulgata/LXX e hebraico; o campo
+    # canon_ref SEMPRE usa a numeração da Vulgata (conversores de fontes hebraicas devem mapear).
+    versification: Literal["vulgata", "hebraica", "na"] = "na"
+
+    @field_validator("language")
+    @classmethod
+    def known_language(cls, v: str) -> str:
+        if v not in LANGUAGES:
+            raise ValueError(f"idioma desconhecido: {v} (válidos: {sorted(LANGUAGES)})")
+        return v
 
     @property
     def ingestable(self) -> bool:
@@ -34,6 +46,9 @@ class Passage(BaseModel):
     text: str
     section: str = ""  # breadcrumb opcional: "Parte I > Seção 2"
     language: str = ""
+    # Chave neutra de idioma que alinha o MESMO trecho entre línguas (estilo OSIS):
+    # "John.3.16" na Bíblia, "CIC.1213" no Catecismo. Vazia = sem alinhamento.
+    canon_ref: str = ""
 
     @field_validator("text")
     @classmethod
