@@ -20,6 +20,7 @@ class Passage:
     canon_ref: str = ""  # chave neutra de idioma (John.3.16, CIC.1213)
     language: str = ""
     aligned: bool = False  # True = trazido por alinhamento, não pela busca semântica
+    align: str = ""  # qualidade do alinhamento (ver ckb.schema.Passage.align)
 
 
 def get_collection(settings: Settings):
@@ -45,7 +46,7 @@ def _to_passage(doc: str, meta: dict, score: float, aligned: bool = False) -> Pa
     # exibimos o original quando existir
     return Passage(
         meta.get("original") or doc, meta["ref"], meta["source"], meta.get("authority", ""),
-        score, meta.get("canon_ref", ""), meta.get("language", ""), aligned,
+        score, meta.get("canon_ref", ""), meta.get("language", ""), aligned, meta.get("align", ""),
     )
 
 
@@ -58,20 +59,24 @@ def expand_aligned(collection, passages: list[Passage], langs: list[str]) -> lis
     if not refs or not langs:
         return []
     res = collection.get(
-        where={"$and": [{"canon_ref": {"$in": refs}}, {"language": {"$in": langs}}]},
+        where={"$and": [
+            {"$or": [{"canon_ref": {"$in": refs}}, {"canon_ref_2": {"$in": refs}}]},
+            {"language": {"$in": langs}},
+        ]},
         limit=MAX_ALIGNED,
     )
-    have = {(p.canon_ref, p.source) for p in passages}
+    have = {(p.ref, p.source) for p in passages}
     out = []
     for doc, meta in zip(res["documents"], res["metadatas"]):
-        if (meta.get("canon_ref"), meta["source"]) not in have:
+        if (meta["ref"], meta["source"]) not in have:
             out.append(_to_passage(doc, meta, 0.0, aligned=True))
     return out
 
 
 def format_sources(passages: list[Passage]) -> str:
     blocks = [
-        f'[{i}] ({p.authority}, {p.language or "?"}{", alinhado" if p.aligned else ""}) '
+        f'[{i}] ({p.authority}, {p.language or "?"}{", alinhado" if p.aligned else ""}'
+        f'{", alinhamento incerto" if p.align == "incerto" else ""}) '
         f'{p.source} — {p.ref}\n{p.text}'
         for i, p in enumerate(passages, 1)
     ]

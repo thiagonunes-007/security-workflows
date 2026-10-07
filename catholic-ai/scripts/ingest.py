@@ -25,7 +25,8 @@ def main(source_ids: list[str]) -> None:
         metas = []
         for p, n in zip(ps, norm):
             m = {"ref": p.ref, "source": src.title, "authority": src.authority,
-                 "language": src.language, "section": p.section, "canon_ref": p.canon_ref}
+                 "language": src.language, "section": p.section, "canon_ref": p.canon_ref,
+                 "canon_ref_2": p.canon_ref_2, "align": p.align}
             if n != p.text:  # hebraico/grego: indexa normalizado, guarda o original p/ exibir
                 m["original"] = p.text
             metas.append(m)

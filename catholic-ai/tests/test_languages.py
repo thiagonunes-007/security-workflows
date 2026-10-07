@@ -26,7 +26,7 @@ def test_registry_covers_every_language_and_rejects_unknown():
 
 class FakeCol:
     def get(self, where, limit):
-        assert "John.3.16" in where["$and"][0]["canon_ref"]["$in"]
+        assert "John.3.16" in where["$and"][0]["$or"][0]["canon_ref"]["$in"]
         return {
             "documents": ["εν αρχη", "dup"],
             "metadatas": [

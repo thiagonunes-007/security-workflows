@@ -108,8 +108,8 @@ sources:
     title: Westminster Leningrad Codex (Open Scriptures Hebrew Bible)
     authority: escritura
     language: hbo
-    license_status: verificar
-    license_note: Hipótese - texto em domínio público, OSHB sob CC BY 4.0. Só livros protocanônicos; numeração hebraica (Salmos) exige mapeamento para canon_ref.
+    license_status: livre
+    license_note: README do openscriptures/morphhb - "The text of the WLC remains in the Public Domain"; lematização/morfologia (não usadas aqui) são CC BY 4.0 - creditar o Open Scriptures Hebrew Bible Project. Só protocanônicos; canon_ref via ckb/psalms.py, ckb/books_map.py e ckb/align.py.
     ref_format: "Livro cap,vers"
     versification: hebraica
   - id: nova_vulgata

@@ -49,6 +49,11 @@ class Passage(BaseModel):
     # Chave neutra de idioma que alinha o MESMO trecho entre línguas (estilo OSIS):
     # "John.3.16" na Bíblia, "CIC.1213" no Catecismo. Vazia = sem alinhamento.
     canon_ref: str = ""
+    # Um versículo pode cobrir dois da Vulgata (ex.: hebraico Sl 13,3 = Vulgata 12,2-3)
+    canon_ref_2: str = ""
+    # Como o alinhamento foi obtido: identico | deslocado | incerto | estrutural | psalmos-exato |
+    # psalmos-verificado | psalmos-capitulo | "" (sem alinhamento)
+    align: str = ""
 
     @field_validator("text")
     @classmethod

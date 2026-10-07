@@ -1,0 +1,182 @@
+{
+  "source_id": "wlc_hebrew",
+  "converted_on": "2026-10-07",
+  "input_url": "https://raw.githubusercontent.com/openscriptures/morphhb/master/wlc/",
+  "input_sha256_of_concatenated_books": "fa5869bd42c4bab5dd5e78d1f7d7fb7639917051bf6fa59bbb2acef602557afd",
+  "books": 39,
+  "passages": 23213,
+  "alignment_totals": {
+    "identico": 18926,
+    "incerto": 197,
+    "deslocado": 1039,
+    "estrutural": 524,
+    "psalmos-capitulo": 2348,
+    "psalmos-verificado": 75,
+    "psalmos-exato": 104
+  },
+  "alignment_by_book": {
+    "Gen": {
+      "identico": 1475,
+      "incerto": 24,
+      "deslocado": 34
+    },
+    "Exod": {
+      "identico": 1085,
+      "deslocado": 116,
+      "incerto": 12
+    },
+    "Lev": {
+      "identico": 823,
+      "incerto": 12,
+      "deslocado": 24
+    },
+    "Num": {
+      "identico": 1182,
+      "incerto": 38,
+      "deslocado": 69
+    },
+    "Deut": {
+      "identico": 885,
+      "deslocado": 74
+    },
+    "Josh": {
+      "identico": 636,
+      "incerto": 22
+    },
+    "Judg": {
+      "identico": 609,
+      "incerto": 9
+    },
+    "Ruth": {
+      "identico": 85
+    },
+    "1Sam": {
+      "identico": 795,
+      "deslocado": 16
+    },
+    "2Sam": {
+      "identico": 651,
+      "deslocado": 44
+    },
+    "1Kgs": {
+      "identico": 785,
+      "deslocado": 32
+    },
+    "2Kgs": {
+      "identico": 697,
+      "deslocado": 22
+    },
+    "1Chr": {
+      "identico": 811,
+      "deslocado": 115,
+      "incerto": 17
+    },
+    "2Chr": {
+      "identico": 789,
+      "deslocado": 33
+    },
+    "Ezra": {
+      "identico": 280
+    },
+    "Neh": {
+      "identico": 312,
+      "incerto": 17,
+      "deslocado": 76
+    },
+    "Esth": {
+      "estrutural": 167
+    },
+    "Job": {
+      "identico": 987,
+      "incerto": 9,
+      "deslocado": 74
+    },
+    "Ps": {
+      "psalmos-capitulo": 2348,
+      "psalmos-verificado": 75,
+      "psalmos-exato": 104
+    },
+    "Prov": {
+      "identico": 915
+    },
+    "Eccl": {
+      "identico": 192,
+      "deslocado": 30
+    },
+    "Song": {
+      "incerto": 4,
+      "deslocado": 39,
+      "identico": 74
+    },
+    "Isa": {
+      "identico": 1256,
+      "deslocado": 30,
+      "incerto": 5
+    },
+    "Jer": {
+      "identico": 1318,
+      "deslocado": 40,
+      "incerto": 6
+    },
+    "Lam": {
+      "identico": 154
+    },
+    "Ezek": {
+      "identico": 1230,
+      "incerto": 6,
+      "deslocado": 37
+    },
+    "Dan": {
+      "estrutural": 357
+    },
+    "Hos": {
+      "identico": 155,
+      "deslocado": 37,
+      "incerto": 5
+    },
+    "Joel": {
+      "identico": 47,
+      "deslocado": 26
+    },
+    "Amos": {
+      "identico": 139,
+      "incerto": 5,
+      "deslocado": 2
+    },
+    "Obad": {
+      "identico": 21
+    },
+    "Jonah": {
+      "identico": 48
+    },
+    "Mic": {
+      "identico": 91,
+      "deslocado": 8,
+      "incerto": 6
+    },
+    "Nah": {
+      "identico": 33,
+      "deslocado": 14
+    },
+    "Hab": {
+      "identico": 56
+    },
+    "Zeph": {
+      "identico": 53
+    },
+    "Hag": {
+      "identico": 14,
+      "deslocado": 24
+    },
+    "Zech": {
+      "identico": 194,
+      "deslocado": 17
+    },
+    "Mal": {
+      "identico": 49,
+      "deslocado": 6
+    }
+  },
+  "empty_verses_in_input": [],
+  "license_note": "Texto do WLC em domínio público; lematização/morfologia (não usadas) CC BY 4.0 (OSHB)."
+}

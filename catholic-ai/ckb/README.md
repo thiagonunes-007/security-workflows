@@ -72,3 +72,35 @@ Cada fonte nova das línguas acima já está registrada em `sources.yaml` com st
 então os dois se alinham versículo a versículo. A Vulgata fica em `corpus/vulgata_clementina.jsonl`,
 com 8 versículos vazios na fonte (listados no provenance). Na normalização de busca, as ligaduras
 `æ`/`œ` viram `ae`/`oe`; o texto original é preservado.
+
+## Hebraico (WLC/OSHB) alinhado à Vulgata
+```bash
+# baixe os 39 XML de https://github.com/openscriptures/morphhb/tree/master/wlc (ver docstring do script)
+python -m scripts.convert_scrollmapper_bible vulgata_clementina VulgClementine.json   # pré-requisito
+python -m scripts.convert_oshb_hebrew PASTA_COM_XML      # ~1 min; gera wlc_hebrew.jsonl (23.213 versículos)
+```
+`ref` usa a numeração **hebraica** (Sl 23,1); `canon_ref` aponta o versículo latino (Ps.22.1). O campo
+`align` diz como o par foi obtido (confiança decrescente):
+
+| `align` | Método | Confiança |
+|---|---|---|
+| `psalmos-exato` / `-verificado` / `-capitulo` | `ckb/psalms.py` (ver `PSALMS.md`) | alta / alta / média |
+| `estrutural` | `ckb/books_map.py` (Ester, Daniel: acréscimos gregos) | alta (fronteiras conferidas no latim) |
+| `identico` | alinhador por comprimento, mesmo cap./vers. | alta |
+| `deslocado` | alinhador, numeração diferente (Jl 3,1 = Jl 2,28 etc.) | boa: pontos de controle conhecidos conferem |
+| `incerto` | bead não 1:1 ou vizinho de um | **baixa** — o RAG sinaliza "alinhamento incerto" |
+| *(vazio)* | sem par latino | — |
+
+Dois versículos hebraicos podem cair no mesmo latino (Nm 25,19 e 26,1 = Nm 26,1) e um hebraico pode cobrir
+dois latinos (`canon_ref_2`).
+
+**Limites**
+- O alinhador (`ckb/align.py`) é heurístico (comprimento dos versículos); concordou com a tabela dos Salmos
+  em 99,6% (2.518/2.527). Foi conferido contra ~40 concordâncias conhecidas (Jl, Ml, Nm 17, Dt 13, Jó 41,
+  Os 2, Mq 4–5, Zc 2, Ne 3–4/10, 1–2Sm, 1–2Rs…), mas **não houve revisão verso a verso**.
+- `canon_ref` dos livros que não são Salmos segue a numeração do dataset latino usado (scrollmapper), que
+  em alguns livros coincide com a hebraica (ex.: Jonas 2,1). Isso é consistente com a Douay-Rheims (35.800
+  de 35.805 refs em comum), mas pode diferir da numeração impressa da Clementina.
+- Ketiv é mantido no corpo; qere e variantes (`<note>`) são descartados. Texto com cantilação e vocalização
+  originais; a busca usa a versão normalizada (`normalize_for_search`).
+- Sem deuterocanônicos (não existem no WLC); no hebraico, esses livros vêm do grego/latim.
